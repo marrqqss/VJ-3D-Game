@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://c30dphr7gin8d"]
+
+[ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_o5qli"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 31, 0)
+shadow_enabled = true
+
+[node name="Foundation" type="CSGCombiner3D" parent="."]
+transform = Transform3D(3.2, 0, 0, 0, 1, 0, 0, 0, 3.2, 0, 0, 0)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Foundation"]
+use_collision = true
+size = Vector3(10, 1, 10)
+
+[node name="Wall1" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.999998, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0.987154, -4.51875)
+use_collision = true
+size = Vector3(9.7, 1, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.999995, -4.4875, 1, 0.324999)
+use_collision = true
+size = Vector3(1, 1, 9)
+
+[node name="Wall3" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.999997, 4.4875, 1, 0.3)
+use_collision = true
+size = Vector3(1, 1, 9)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, -0.4, 40.3, 48.5)
+fov = 31.7
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 17.2)

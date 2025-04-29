@@ -11,5 +11,6 @@ config_version=5
 [application]
 
 config/name="Arkanoid 3D"
+run/main_scene="uid://c30dphr7gin8d"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"

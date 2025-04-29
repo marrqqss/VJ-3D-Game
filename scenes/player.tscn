@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpfu28retw1n8"]
+
+[ext_resource type="Script" uid="uid://cdfyeg5io7lwc" path="res://scripts/player.gd" id="1_3vyb7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u8vuu"]
+size = Vector3(4, 1, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_3vyb7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(4, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_u8vuu")

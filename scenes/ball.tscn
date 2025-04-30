@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0ekue5jle6kp"]
+
+[ext_resource type="Script" uid="uid://c3quu267qxuh" path="res://scripts/ball.gd" id="1_7s4qf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n1dj2"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1dj2"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.952941, 0.109804, 0.0196078, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7s4qf"]
+
+[node name="Ball" type="RigidBody3D"]
+axis_lock_linear_y = true
+physics_material_override = SubResource("PhysicsMaterial_n1dj2")
+gravity_scale = 0.0
+script = ExtResource("1_7s4qf")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+material = SubResource("StandardMaterial3D_n1dj2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7s4qf")

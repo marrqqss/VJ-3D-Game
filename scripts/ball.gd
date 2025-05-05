@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	var col = get_last_slide_collision()
 	if col:
 		var collider = col.get_collider()
-		if collider.is_in_group("Player"):
+		if collider.is_in_group("Player"): 
 			print("Player")
 			var local_hit_pos = col.get_position() - collider.global_transform.origin
 			var paddle_width = collider.get_node("CollisionShape3D").shape.extents.x

@@ -1,8 +1,7 @@
 extends CharacterBody3D
 
-
-const SPEED = 10.0
-
+# Export allows to control the variable value in inspector
+@export var SPEED = 10.0
 
 func _physics_process(delta: float) -> void:
 

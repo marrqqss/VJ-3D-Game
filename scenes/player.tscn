@@ -10,11 +10,12 @@ emission = Color(0.941176, 0.133333, 0.968627, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_u8vuu"]
 size = Vector3(4, 1, 1)
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 motion_mode = 1
 script = ExtResource("1_3vyb7")
+SPEED = 15.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 material_override = SubResource("StandardMaterial3D_3vyb7")

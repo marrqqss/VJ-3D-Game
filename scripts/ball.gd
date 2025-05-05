@@ -1,16 +1,38 @@
-extends RigidBody3D
+extends CharacterBody3D
 
-const SPEED = 20
+@export var SPEED: float = 20.0
+@export var BOUNCE: float = 1.0
 
-# Called when the node enters the scene tree for the first time.
+# Direction the ball is moving in world space
+var direction: Vector3 = Vector3(0.5, 0, 1)
+
 func _ready() -> void:
-	#the velocity of a rigidbody can be defined with the variable "linear_velocity"
-	linear_velocity = Vector3(0,0,1) * SPEED
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	# Initialize the built‑in velocity
+	velocity = direction * SPEED
 
 func _physics_process(delta: float) -> void:
-	if linear_velocity.length() != SPEED:
-		linear_velocity = linear_velocity.normalized() * SPEED
+	direction = direction.normalized()
+	velocity = direction * SPEED
+	move_and_slide()
+
+	var col = get_last_slide_collision()
+	if col:
+		var collider = col.get_collider()
+		if collider.is_in_group("Player"):
+			print("Player")
+			var local_hit_pos = col.get_position() - collider.global_transform.origin
+			var paddle_width = collider.get_node("CollisionShape3D").shape.extents.x
+
+			# Calculate horizontal factor: -1 (left) to +1 (right)
+			var factor = clamp(local_hit_pos.x / paddle_width, -1, 1)
+
+			# Arcade bounce: influence x direction based on hit position
+			direction.x = factor
+			direction.z = -abs(direction.z)  # Force the ball to go upward
+
+			direction = direction.normalized()
+		else:
+			# Default physics bounce
+			direction = direction.bounce(col.get_normal()) * BOUNCE
+
+		velocity = direction * SPEED

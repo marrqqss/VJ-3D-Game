@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqibsrdubo41m"]
+[gd_scene load_steps=6 format=3 uid="uid://bqibsrdubo41m"]
 
 [ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_8r6n6"]
+[ext_resource type="PackedScene" uid="uid://dunyw83aoeqfb" path="res://assets/blocks/bricks_B.gltf" id="2_cgrg5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8r6n6"]
 vertex_color_use_as_albedo = true
@@ -22,7 +23,10 @@ script = ExtResource("1_8r6n6")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
 material = SubResource("StandardMaterial3D_8r6n6")
+
+[node name="bricks_B2" parent="." instance=ExtResource("2_cgrg5")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

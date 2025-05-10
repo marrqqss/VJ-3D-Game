@@ -9,6 +9,7 @@ var direction: Vector3 = Vector3(0.5, 0, 1)
 func _ready() -> void:
 	# Initialize the built‑in velocity
 	velocity = direction * SPEED
+	add_to_group("ball")
 
 func _physics_process(delta: float) -> void:
 	direction = direction.normalized()

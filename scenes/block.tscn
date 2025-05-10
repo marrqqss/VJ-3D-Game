@@ -7,6 +7,7 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(0.913725, 0.258824, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8r6n6"]
+size = Vector3(0.9, 1, 0.9)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
 
@@ -16,6 +17,7 @@ axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+can_sleep = false
 script = ExtResource("1_8r6n6")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -29,5 +31,5 @@ shape = SubResource("BoxShape3D_8r6n6")
 [node name="HitDetector" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
-transform = Transform3D(2.4, 0, 0, 0, 2.4, 0, 0, 0, 2.4, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("BoxShape3D_cgrg5")

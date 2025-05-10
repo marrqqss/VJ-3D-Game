@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export var SPEED: float = 20.0
 @export var BOUNCE: float = 1.0
 
-# Direction the ball is moving in world space
+# Direction the ball is moving initialy
 var direction: Vector3 = Vector3(0.5, 0, 1)
 
 func _ready() -> void:
@@ -24,16 +24,13 @@ func _physics_process(delta: float) -> void:
 			var local_hit_pos = col.get_position() - collider.global_transform.origin
 			var paddle_width = collider.get_node("CollisionShape3D").shape.extents.x
 
-			# Calculate horizontal factor: -1 (left) to +1 (right)
 			var factor = clamp(local_hit_pos.x / paddle_width, -1, 1)
 
-			# Arcade bounce: influence x direction based on hit position
 			direction.x = factor
-			direction.z = -abs(direction.z)  # Force the ball to go upward
+			direction.z = -abs(direction.z)
 
 			direction = direction.normalized()
 		else:
-			# Default physics bounce
 			direction = direction.bounce(col.get_normal()) * BOUNCE
 
 		velocity = direction * SPEED

@@ -36,30 +36,30 @@ use_collision = true
 size = Vector3(9.53385, 1, 9.96045)
 
 [node name="Wall" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 1.09992, 0, 1.2, -4.5)
+transform = Transform3D(0.7, 0, 0, 0, 2.72278, 0, 0, 0, 1.09992, 0, 1.44794, -4.5)
 use_collision = true
 size = Vector3(13.6, 0.7, 0.8)
 
 [node name="Wall2" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.999985, -4.435, 1.2, 0.474998)
+transform = Transform3D(0.7, 0, 0, 0, 2.72278, 0, 0, 0, 0.999973, -4.42456, 1.44794, 0.472439)
 use_collision = true
-size = Vector3(1, 0.7, 9.1)
+size = Vector3(0.970215, 0.7, 9.09488)
 
 [node name="Wall3" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.999985, 4.42, 1.2, 0.474999)
+transform = Transform3D(0.7, 0, 0, 0, 2.72278, 0, 0, 0, 0.999984, 4.42, 1.44794, 0.474999)
 use_collision = true
 size = Vector3(1, 0.7, 9.1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, -0.4, 40.3, 48.5)
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, -0.4, 36.9, 44.4)
 fov = 31.7
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 17.2)
 SPEED = 18.0
 
-[node name="Ball" parent="." instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+[node name="Ball" parent="Player" instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -17.2)
 
 [node name="Block" parent="." instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2)

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqur82o28nq3n"]
+
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_6ds3u"]
+[ext_resource type="PackedScene" uid="uid://w1l2k8tvrljp" path="res://assets/blocks/stone.gltf" id="2_6ds3u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8r6n6"]
+size = Vector3(0.979941, 1, 0.971753)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
+
+[node name="Stone" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_6ds3u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.00475764, 0, -0.00412598)
+shape = SubResource("BoxShape3D_8r6n6")
+
+[node name="stone2" parent="." instance=ExtResource("2_6ds3u")]
+
+[node name="HitDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_cgrg5")

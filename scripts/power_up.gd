@@ -11,6 +11,7 @@ var y_velocity: float = 0.0
 var bounce_gravity: float = 15.0  
 var is_bouncing: bool = true
 var original_y: float = 0.0
+var timer = 0
 
 func _ready() -> void:
 	add_to_group("powerups")
@@ -23,7 +24,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Aplicar rotación visual
 	rotate_y(rotation_speed * delta)
-	
 	if is_bouncing:
 		# Simular gravedad
 		y_velocity -= bounce_gravity * delta
@@ -56,7 +56,4 @@ func _on_body_entered(body: Node) -> void:
 func apply_powerup(player: Node) -> void:
 	match powerup_type:
 		"expand_paddle":
-			player.scale.x = 1.5
-			var timer = get_tree().create_timer(20.0)
-			timer.timeout.connect(func(): player.scale.x = 1.0)
-		# Añade más tipos según necesites
+			player.expand_paddle()

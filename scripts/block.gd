@@ -22,7 +22,7 @@ func _on_body_entered(body: Node) -> void:
 	queue_free()
 
 func spawn_powerup(pos: Vector3) -> void:
-	var powerup_scene = load("res://scenes/power_up.tscn")
+	var powerup_scene = load("res://scenes/expand_paddle.tscn")
 	var powerup = powerup_scene.instantiate()
 	
 	# Posiciona el powerup en la ubicación del bloque

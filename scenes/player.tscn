@@ -23,3 +23,6 @@ size = Vector3(4, 1, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_u8vuu")
+
+[node name="expand_paddle_timer" type="Timer" parent="."]
+one_shot = true

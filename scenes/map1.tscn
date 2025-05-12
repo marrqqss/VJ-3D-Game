@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcprdjt3mj7rq"]
+[gd_scene load_steps=12 format=3 uid="uid://bcprdjt3mj7rq"]
 
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_v7ld6"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_x0ugi"]
+[ext_resource type="PackedScene" uid="uid://cebobf4k7ubhw" path="res://map_blocks/barrels.tscn" id="3_2m3eu"]
+[ext_resource type="PackedScene" uid="uid://c203oqew6rq2c" path="res://map_blocks/gold_rock.tscn" id="3_raiux"]
+[ext_resource type="PackedScene" uid="uid://cv7txdmlwslxp" path="res://map_blocks/dirt_w_grass.tscn" id="3_uyy6q"]
 [ext_resource type="PackedScene" uid="uid://8bp1g3heak0a" path="res://map_blocks/stone_dark.tscn" id="3_v7ld6"]
 [ext_resource type="PackedScene" uid="uid://cyhqnr112s77u" path="res://map_blocks/dirt.tscn" id="3_wpo3d"]
 [ext_resource type="PackedScene" uid="uid://dqur82o28nq3n" path="res://map_blocks/stone.tscn" id="3_x0ugi"]
@@ -53,7 +56,7 @@ use_collision = true
 size = Vector3(1, 0.7, 9.1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, -0.4, 36.9, 44.4)
+transform = Transform3D(1, 0, 0, 0, 0.642787, 0.766045, 0, -0.766045, 0.642787, -0.4, 48.4, 40.9)
 fov = 31.7
 
 [node name="Player" parent="." instance=ExtResource("1_v7ld6")]
@@ -66,8 +69,328 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -4.2)
 [node name="LevelBlocks" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49154, 0)
 
+[node name="Stone25" parent="LevelBlocks" instance=ExtResource("3_raiux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+
+[node name="Barrels" parent="LevelBlocks" instance=ExtResource("3_2m3eu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2)
+
+[node name="Barrels2" parent="LevelBlocks" instance=ExtResource("3_2m3eu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -4)
+
+[node name="Barrels3" parent="LevelBlocks" instance=ExtResource("3_2m3eu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, -8)
+
+[node name="Barrels4" parent="LevelBlocks" instance=ExtResource("3_2m3eu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, -6)
+
+[node name="Barrels5" parent="LevelBlocks" instance=ExtResource("3_2m3eu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6, -8)
+
+[node name="Dirt_w_grass" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+
+[node name="Dirt_w_grass2" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2)
+
+[node name="Dirt_w_grass3" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -2)
+
+[node name="Dirt_w_grass4" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -2)
+
+[node name="Dirt_w_grass5" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -2)
+
+[node name="Dirt_w_grass6" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -4)
+
+[node name="Dirt_w_grass7" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -4)
+
+[node name="Dirt_w_grass8" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, -4)
+
+[node name="Dirt_w_grass9" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -6)
+
+[node name="Dirt_w_grass10" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -6)
+
+[node name="Dirt_w_grass49" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -8)
+
+[node name="Dirt_w_grass50" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
+
+[node name="Dirt_w_grass51" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
+
+[node name="Dirt_w_grass52" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="Dirt_w_grass56" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -12)
+
+[node name="Dirt_w_grass57" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+
+[node name="Dirt_w_grass59" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -8)
+
+[node name="Dirt_w_grass62" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
+
+[node name="Dirt_w_grass78" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -6)
+
+[node name="Dirt_w_grass64" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+
+[node name="Dirt_w_grass65" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+
+[node name="Dirt_w_grass67" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Dirt_w_grass69" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="Dirt_w_grass70" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="Dirt_w_grass71" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="Dirt_w_grass72" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Dirt_w_grass73" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Dirt_w_grass74" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, -2)
+
+[node name="Dirt_w_grass75" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -4)
+
+[node name="Stone26" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -4)
+
+[node name="Stone27" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -2)
+
+[node name="Stone31" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+
+[node name="Stone32" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -4)
+
+[node name="Stone28" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
+
+[node name="Stone29" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -4)
+
+[node name="Stone33" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
+
+[node name="Stone34" parent="LevelBlocks" instance=ExtResource("3_x0ugi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
+
+[node name="Stone30" parent="LevelBlocks" instance=ExtResource("3_raiux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -4)
+
+[node name="Dirt_w_grass77" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="Dirt_w_grass11" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -6)
+
+[node name="Dirt_w_grass12" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -8)
+
+[node name="Dirt_w_grass13" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -8)
+
+[node name="Dirt_w_grass14" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+
+[node name="Dirt_w_grass15" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -12)
+
+[node name="Dirt_w_grass16" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -12)
+
+[node name="Dirt_w_grass17" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -12)
+
+[node name="Dirt_w_grass18" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -10)
+
+[node name="Dirt_w_grass19" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, -8)
+
+[node name="Dirt_w_grass21" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, -4)
+
+[node name="Dirt_w_grass22" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -2)
+
+[node name="Dirt_w_grass23" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0)
+
+[node name="Dirt_w_grass24" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0)
+
+[node name="Dirt_w_grass25" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
+
+[node name="Dirt_w_grass26" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -2)
+
+[node name="Dirt_w_grass27" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -2)
+
+[node name="Dirt_w_grass28" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -2)
+
+[node name="Dirt_w_grass29" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -4)
+
+[node name="Dirt_w_grass30" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -4)
+
+[node name="Dirt_w_grass31" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -6)
+
+[node name="Dirt_w_grass33" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -8)
+
+[node name="Dirt_w_grass34" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -8)
+
+[node name="Dirt_w_grass35" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -10)
+
+[node name="Dirt_w_grass36" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -10)
+
+[node name="Dirt_w_grass37" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -8)
+
+[node name="Dirt_w_grass38" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -8)
+
+[node name="Dirt_w_grass39" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -10)
+
+[node name="Dirt_w_grass40" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -6)
+
+[node name="Dirt_w_grass41" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -6)
+
+[node name="Dirt_w_grass42" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -6)
+
+[node name="Dirt_w_grass43" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -4)
+
+[node name="Dirt_w_grass44" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -4)
+
+[node name="Dirt_w_grass45" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -4)
+
+[node name="Dirt_w_grass46" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -8)
+
+[node name="Dirt_w_grass47" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -6)
+
+[node name="Dirt_w_grass48" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -6)
+
+[node name="Dirt_w_grass32" parent="LevelBlocks" instance=ExtResource("3_uyy6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4, -6)
+
 [node name="Dirt" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Dirt10" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+
+[node name="Dirt11" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+
+[node name="Dirt29" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="Dirt34" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+
+[node name="Dirt35" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -6)
+
+[node name="Dirt30" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+
+[node name="Dirt31" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="Dirt32" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+
+[node name="Dirt12" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
+
+[node name="Dirt13" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="Dirt14" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -12)
+
+[node name="Dirt15" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
+
+[node name="Dirt16" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
+
+[node name="Dirt17" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -10)
+
+[node name="Dirt18" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -10)
+
+[node name="Dirt19" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -10)
+
+[node name="Dirt20" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8)
+
+[node name="Dirt21" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -6)
+
+[node name="Dirt22" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4)
+
+[node name="Dirt23" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -2)
+
+[node name="Dirt24" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -2)
+
+[node name="Dirt25" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -2)
+
+[node name="Dirt26" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -4)
+
+[node name="Dirt27" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, -6)
+
+[node name="Dirt28" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -8)
 
 [node name="Dirt2" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
@@ -83,9 +406,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -2)
 
 [node name="Dirt6" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
-
-[node name="Dirt7" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -6)
 
 [node name="Dirt8" parent="LevelBlocks" instance=ExtResource("3_wpo3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -8)

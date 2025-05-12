@@ -1,27 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmh050x2xuuns"]
+[gd_scene load_steps=5 format=3 uid="uid://c203oqew6rq2c"]
 
-[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_ny6hr"]
-[ext_resource type="PackedScene" uid="uid://cnxnf470y5cj5" path="res://assets/blocks/wood.gltf" id="2_ny6hr"]
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_e1ivd"]
+[ext_resource type="PackedScene" uid="uid://dqqjo3i7wakqr" path="res://assets/blocks/stone_with_gold.gltf" id="2_e1ivd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8r6n6"]
 size = Vector3(0.979941, 1, 0.971753)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
 
-[node name="Wood" type="RigidBody3D"]
+[node name="Stone" type="RigidBody3D"]
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 can_sleep = false
-script = ExtResource("1_ny6hr")
+script = ExtResource("1_e1ivd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.00475764, 0, -0.00412598)
 shape = SubResource("BoxShape3D_8r6n6")
 
-[node name="wood2" parent="." instance=ExtResource("2_ny6hr")]
+[node name="stone_with_gold2" parent="." instance=ExtResource("2_e1ivd")]
 
 [node name="HitDetector" type="Area3D" parent="."]
 

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://r0d1yjk0gwr6"]
+
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_7krth"]
+[ext_resource type="PackedScene" uid="uid://cswvllmvpkvdv" path="res://assets/spooktober/fencePost.gltf.glb" id="2_7krth"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_as7nv"]
+size = Vector3(0.945594, 1, 0.941746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
+
+[node name="Spikes" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_7krth")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)
+shape = SubResource("BoxShape3D_as7nv")
+
+[node name="fencePost_gltf" parent="." instance=ExtResource("2_7krth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, -0.5)
+
+[node name="fencePost_gltf2" parent="." instance=ExtResource("2_7krth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1.5, -0.5)
+
+[node name="fencePost_gltf3" parent="." instance=ExtResource("2_7krth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1.5, 0.5)
+
+[node name="fencePost_gltf4" parent="." instance=ExtResource("2_7krth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.5, 0.5)
+
+[node name="fencePost_gltf5" parent="." instance=ExtResource("2_7krth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+
+[node name="HitDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_cgrg5")

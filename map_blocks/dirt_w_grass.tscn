@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_pruea"]
 [ext_resource type="PackedScene" uid="uid://bstmualp0no0o" path="res://assets/blocks/dirt_with_grass.gltf" id="2_pruea"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8r6n6"]
-size = Vector3(0.979941, 1, 0.971753)
+[sub_resource type="BoxShape3D" id="BoxShape3D_jp3ia"]
+size = Vector3(0.945594, 1, 0.941746)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
 
@@ -18,8 +18,8 @@ can_sleep = false
 script = ExtResource("1_pruea")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.00475764, 0, -0.00412598)
-shape = SubResource("BoxShape3D_8r6n6")
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)
+shape = SubResource("BoxShape3D_jp3ia")
 
 [node name="dirt_with_grass2" parent="." instance=ExtResource("2_pruea")]
 

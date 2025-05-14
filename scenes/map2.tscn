@@ -1,0 +1,673 @@
+[gd_scene load_steps=11 format=3 uid="uid://djywy03ta7dga"]
+
+[ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_hs16b"]
+[ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_btxqx"]
+[ext_resource type="PackedScene" uid="uid://cxlvlvn6opgey" path="res://map_blocks/sand.tscn" id="3_lk7cf"]
+[ext_resource type="PackedScene" uid="uid://b4li0e67kue6g" path="res://map_blocks/gold_stack.tscn" id="4_rtqf6"]
+[ext_resource type="PackedScene" uid="uid://bc4njct07owjw" path="res://map_blocks/bricks.tscn" id="5_u6ti8"]
+[ext_resource type="PackedScene" uid="uid://celdosw2mxv4l" path="res://map_blocks/textiles.tscn" id="6_rutqx"]
+[ext_resource type="PackedScene" uid="uid://cpaaekstj020r" path="res://map_blocks/water.tscn" id="6_u6ti8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 31, 0)
+light_specular = 3.286
+shadow_enabled = true
+
+[node name="Foundation" type="CSGCombiner3D" parent="."]
+transform = Transform3D(3.2, 0, 0, 0, 1, 0, 0, 0, 3.2, 0, 0, 0)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11279, 0.00371203, 0, -0.756495)
+use_collision = true
+size = Vector3(9.53385, 1, 9.96045)
+
+[node name="Wall" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.224, 0.000141441, 1.44794, -5.80788)
+use_collision = true
+size = Vector3(13.6, 0.7, 0.8)
+
+[node name="Wall2" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, -5.79103, 1.44794, -0.2745)
+use_collision = true
+size = Vector3(0.970215, 0.7, 9.09488)
+
+[node name="Wall3" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11279, 5.78534, 1.44794, -0.271652)
+use_collision = true
+size = Vector3(1, 0.7, 9.1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.642787, 0.766045, 0, -0.766045, 0.642787, -0.4, 48.4, 40.9)
+fov = 31.7
+
+[node name="Player" parent="." instance=ExtResource("1_hs16b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 16.2)
+SPEED = 18.0
+
+[node name="Ball" parent="Player" instance=ExtResource("2_btxqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -4.2)
+
+[node name="LevelBlocks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49154, 0)
+
+[node name="Sand" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, 0)
+
+[node name="Sand2" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, 0)
+
+[node name="Sand3" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, 0)
+
+[node name="Sand4" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, 0)
+
+[node name="Sand5" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, 0)
+
+[node name="Sand6" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, -2)
+
+[node name="Sand7" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -2)
+
+[node name="Sand8" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, -2)
+
+[node name="Sand9" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, -2)
+
+[node name="Sand10" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, -2)
+
+[node name="Sand11" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, -4)
+
+[node name="Sand12" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, -4)
+
+[node name="Sand13" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, -4)
+
+[node name="Sand14" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, -6)
+
+[node name="Sand15" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, 2)
+
+[node name="Sand16" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, 2)
+
+[node name="Sand17" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, 4)
+
+[node name="Sand18" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, 2)
+
+[node name="Sand19" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, 4)
+
+[node name="Sand20" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, 2)
+
+[node name="Sand21" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -4)
+
+[node name="Gold_stack" parent="LevelBlocks" instance=ExtResource("4_rtqf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.00846, 0)
+
+[node name="Gold_stack3" parent="LevelBlocks" instance=ExtResource("4_rtqf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.00846, -2)
+
+[node name="Gold_stack4" parent="LevelBlocks" instance=ExtResource("4_rtqf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.00846, -2)
+
+[node name="Gold_stack2" parent="LevelBlocks" instance=ExtResource("4_rtqf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.00846, 0)
+
+[node name="Bricks" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.00846, 2)
+
+[node name="Bricks2" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.00846, 2)
+
+[node name="Bricks3" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4.00846, 2)
+
+[node name="Bricks4" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4.00846, 2)
+
+[node name="Bricks5" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.00846, 2)
+
+[node name="Bricks6" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 4.00846, 2)
+
+[node name="Bricks7" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.00846, 0)
+
+[node name="Bricks8" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 4.00846, 0)
+
+[node name="Bricks9" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 4.00846, -2)
+
+[node name="Bricks10" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.00846, -2)
+
+[node name="Bricks11" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.00846, -4)
+
+[node name="Bricks12" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 4.00846, -4)
+
+[node name="Bricks13" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4.00846, -4)
+
+[node name="Bricks14" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.00846, -4)
+
+[node name="Bricks15" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.00846, -4)
+
+[node name="Bricks16" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4.00846, -4)
+
+[node name="Bricks17" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.00846, -4)
+
+[node name="Bricks18" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.00846, -4)
+
+[node name="Bricks19" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.00846, -2)
+
+[node name="Bricks20" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.00846, 0)
+
+[node name="Bricks21" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.00846, 2)
+
+[node name="Bricks22" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.00846, 2)
+
+[node name="Bricks23" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.00846, 0)
+
+[node name="Bricks24" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.00846, -2)
+
+[node name="Bricks25" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 6.00846, 2)
+
+[node name="Bricks26" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6.00846, 2)
+
+[node name="Bricks27" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 6.00846, -4)
+
+[node name="Bricks28" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 6.00846, -4)
+
+[node name="Bricks29" parent="LevelBlocks" instance=ExtResource("5_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 6.00846, -4)
+
+[node name="Sand23" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, 2)
+
+[node name="Sand63" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, 2)
+
+[node name="Sand64" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, 2)
+
+[node name="Sand24" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, 4)
+
+[node name="Sand26" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, 6)
+
+[node name="Sand27" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, 4)
+
+[node name="Sand28" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, 6)
+
+[node name="Sand29" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, 4)
+
+[node name="Sand30" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, -4)
+
+[node name="Sand31" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -6)
+
+[node name="Sand32" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, -6)
+
+[node name="Sand33" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, -6)
+
+[node name="Sand34" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, -6)
+
+[node name="Sand35" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0.00846004, -16)
+
+[node name="Sand36" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.00846004, -16)
+
+[node name="Sand37" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0.00846004, -14)
+
+[node name="Sand38" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.00846004, -14)
+
+[node name="Sand39" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.00846004, -14)
+
+[node name="Sand40" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.00846004, -16)
+
+[node name="Sand41" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -16)
+
+[node name="Textiles" parent="LevelBlocks" instance=ExtResource("6_rutqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.00846, -12)
+
+[node name="Textiles2" parent="LevelBlocks" instance=ExtResource("6_rutqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.00846, -12)
+
+[node name="Textiles3" parent="LevelBlocks" instance=ExtResource("6_rutqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4.00846, -16)
+
+[node name="Sand60" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.00846, -16)
+
+[node name="Sand42" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.00846004, -14)
+
+[node name="Sand61" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.00846, -14)
+
+[node name="Sand62" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.00846, -16)
+
+[node name="Sand43" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -14)
+
+[node name="Sand44" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.00846, -14)
+
+[node name="Sand45" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0.00846004, -12)
+
+[node name="Sand46" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.00846004, -12)
+
+[node name="Sand47" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0.00846004, -10)
+
+[node name="Sand48" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.00846004, -10)
+
+[node name="Sand49" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.00846004, -10)
+
+[node name="Sand50" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.00846004, -12)
+
+[node name="Sand51" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -12)
+
+[node name="Sand52" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.00846004, -10)
+
+[node name="Sand53" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -10)
+
+[node name="Sand54" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -10)
+
+[node name="Sand55" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.00846004, -8)
+
+[node name="Sand56" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -8)
+
+[node name="Sand57" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.00846004, -6)
+
+[node name="Sand58" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -6)
+
+[node name="Sand59" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -6)
+
+[node name="Sand65" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -16)
+
+[node name="Sand66" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -16)
+
+[node name="Sand80" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -14)
+
+[node name="Sand82" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -12)
+
+[node name="Sand81" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -12)
+
+[node name="Sand68" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.00846, -14)
+
+[node name="Sand69" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -14)
+
+[node name="Sand70" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.00846, -16)
+
+[node name="Sand71" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.00846, -16)
+
+[node name="Sand72" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.00846, -14)
+
+[node name="Sand75" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -16)
+
+[node name="Sand76" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -16)
+
+[node name="Water" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, 0)
+
+[node name="Water2" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, 0)
+
+[node name="Water3" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -2)
+
+[node name="Water4" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -2)
+
+[node name="Water5" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, 4)
+
+[node name="Water7" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, 2)
+
+[node name="Water8" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, 2)
+
+[node name="Water9" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, 4)
+
+[node name="Water10" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, 4)
+
+[node name="Water11" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, 2)
+
+[node name="Water12" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, 0)
+
+[node name="Water13" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, 0)
+
+[node name="Water14" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, 0)
+
+[node name="Water15" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -2)
+
+[node name="Water16" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, -2)
+
+[node name="Water17" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, -4)
+
+[node name="Water18" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -4)
+
+[node name="Water19" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -6)
+
+[node name="Water20" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, -6)
+
+[node name="Water21" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -4)
+
+[node name="Water22" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -4)
+
+[node name="Water23" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -6)
+
+[node name="Water24" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -6)
+
+[node name="Water25" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -4)
+
+[node name="Water26" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -4)
+
+[node name="Water27" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -6)
+
+[node name="Water28" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -6)
+
+[node name="Water29" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, 0)
+
+[node name="Water30" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, 0)
+
+[node name="Water31" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -2)
+
+[node name="Water32" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -2)
+
+[node name="Water33" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, 0)
+
+[node name="Water34" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, 0)
+
+[node name="Water35" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -2)
+
+[node name="Water81" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.00846004, -4)
+
+[node name="Water82" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -4)
+
+[node name="Water83" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -6)
+
+[node name="Water84" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -8)
+
+[node name="Water85" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -10)
+
+[node name="Water86" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -10)
+
+[node name="Water87" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, -8)
+
+[node name="Water88" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -8)
+
+[node name="Water89" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -10)
+
+[node name="Water90" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -12)
+
+[node name="Water91" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -12)
+
+[node name="Water92" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -12)
+
+[node name="Water93" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -14)
+
+[node name="Water94" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -16)
+
+[node name="Water95" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -16)
+
+[node name="Water36" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, -2)
+
+[node name="Water40" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.00846004, 2)
+
+[node name="Water42" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, 4)
+
+[node name="Water43" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.00846004, 2)
+
+[node name="Water44" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, 2)
+
+[node name="Water45" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, -8)
+
+[node name="Water46" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -8)
+
+[node name="Water47" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -10)
+
+[node name="Water48" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, -10)
+
+[node name="Water49" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, -8)
+
+[node name="Water50" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, -8)
+
+[node name="Water59" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, -6)
+
+[node name="Water68" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, -4)
+
+[node name="Water69" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, -2)
+
+[node name="Water60" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, -6)
+
+[node name="Water51" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, -10)
+
+[node name="Water52" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, -10)
+
+[node name="Water53" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, -12)
+
+[node name="Water54" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, -12)
+
+[node name="Water55" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.00846004, -14)
+
+[node name="Water56" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.00846004, -14)
+
+[node name="Water57" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, -12)
+
+[node name="Water58" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -12)
+
+[node name="Water61" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, -8)
+
+[node name="Water62" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -8)
+
+[node name="Water63" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -10)
+
+[node name="Water64" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, -10)
+
+[node name="Water65" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.00846004, -8)
+
+[node name="Water66" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, -8)
+
+[node name="Water67" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.00846004, -10)
+
+[node name="Water73" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, -12)
+
+[node name="Water74" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -12)
+
+[node name="Water75" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.00846004, -14)
+
+[node name="Water76" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.00846004, -14)
+
+[node name="Water77" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -8)
+
+[node name="Water78" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -8)
+
+[node name="Water79" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -10)
+
+[node name="Water80" parent="LevelBlocks" instance=ExtResource("6_u6ti8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00846004, -10)
+
+[node name="Sand77" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.00846004, -14)
+
+[node name="Sand78" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00846004, -14)
+
+[node name="Sand25" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, 4)
+
+[node name="Sand22" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -4)

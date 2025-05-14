@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bs2u6ad0qv6yf"
-path="res://.godot/imported/Copper_Bars.gltf-af6e927e1c346f70d29deec389248b6b.scn"
+uid="uid://ca6knq0jrq0wq"
+path="res://.godot/imported/lampPost.gltf.glb-5154f5e3763a9687306fc595db67d1c0.scn"
 
 [deps]
 
-source_file="res://assets/resource/Copper_Bars.gltf"
-dest_files=["res://.godot/imported/Copper_Bars.gltf-af6e927e1c346f70d29deec389248b6b.scn"]
+source_file="res://assets/spooktober/lampPost.gltf.glb"
+dest_files=["res://.godot/imported/lampPost.gltf.glb-5154f5e3763a9687306fc595db67d1c0.scn"]
 
 [params]
 

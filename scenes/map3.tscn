@@ -1,0 +1,624 @@
+[gd_scene load_steps=12 format=3 uid="uid://brlitfkqjp8ov"]
+
+[ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_53xux"]
+[ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_4cdx2"]
+[ext_resource type="PackedScene" uid="uid://8bp1g3heak0a" path="res://map_blocks/stone_dark.tscn" id="3_mltpi"]
+[ext_resource type="PackedScene" uid="uid://bktc0onr5lusn" path="res://map_blocks/lava.tscn" id="4_68yje"]
+[ext_resource type="PackedScene" uid="uid://nopqacypb66o" path="res://map_blocks/bricks_gray.tscn" id="5_2pqj4"]
+[ext_resource type="PackedScene" uid="uid://dxf6nop0dn64v" path="res://map_blocks/fence.tscn" id="6_53xux"]
+[ext_resource type="PackedScene" uid="uid://r0d1yjk0gwr6" path="res://map_blocks/spikes.tscn" id="7_53xux"]
+[ext_resource type="PackedScene" uid="uid://cldfhdqw3ugrn" path="res://map_blocks/gravestone.tscn" id="8_4cdx2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 31, 0)
+light_color = Color(0.0427, 0.26962, 0.61, 1)
+light_energy = 0.39
+light_specular = 9.838
+shadow_enabled = true
+
+[node name="Foundation" type="CSGCombiner3D" parent="."]
+transform = Transform3D(3.2, 0, 0, 0, 1, 0, 0, 0, 3.2, 0, 0, 0)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11279, 0.00371203, 0, -0.756495)
+use_collision = true
+size = Vector3(9.53385, 1, 9.96045)
+
+[node name="Wall" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.224, 0.000141441, 1.44794, -5.80788)
+use_collision = true
+size = Vector3(13.6, 0.7, 0.8)
+
+[node name="Wall2" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, -5.79103, 1.44794, -0.2745)
+use_collision = true
+size = Vector3(0.970215, 0.7, 9.09488)
+
+[node name="Wall3" type="CSGBox3D" parent="Foundation"]
+transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11279, 5.78534, 1.44794, -0.271652)
+use_collision = true
+size = Vector3(1, 0.7, 9.1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.642787, 0.766045, 0, -0.766045, 0.642787, -0.4, 48.4, 40.9)
+fov = 31.7
+
+[node name="Player" parent="." instance=ExtResource("1_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 16.2)
+SPEED = 18.0
+
+[node name="Ball" parent="Player" instance=ExtResource("2_4cdx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -4.2)
+
+[node name="LevelBlocks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49154, 0)
+
+[node name="Stone_dark" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="Stone_dark3" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -2)
+
+[node name="Stone_dark4" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -4)
+
+[node name="Stone_dark85" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -6)
+
+[node name="Stone_dark87" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -6)
+
+[node name="Stone_dark89" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -8)
+
+[node name="Stone_dark90" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -8)
+
+[node name="Stone_dark91" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -8)
+
+[node name="Stone_dark92" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
+
+[node name="Stone_dark93" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -6)
+
+[node name="Stone_dark95" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -8)
+
+[node name="Stone_dark96" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+
+[node name="Stone_dark97" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+
+[node name="Stone_dark99" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
+
+[node name="Stone_dark100" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+
+[node name="Stone_dark102" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="Stone_dark104" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
+
+[node name="Stone_dark105" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
+
+[node name="Stone_dark106" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10)
+
+[node name="Stone_dark108" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
+
+[node name="Stone_dark109" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -10)
+
+[node name="Stone_dark110" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12)
+
+[node name="Stone_dark111" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -12)
+
+[node name="Stone_dark113" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -12)
+
+[node name="Stone_dark114" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
+
+[node name="Stone_dark115" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -14)
+
+[node name="Stone_dark116" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="Stone_dark117" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+
+[node name="Stone_dark119" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="Stone_dark120" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="Stone_dark121" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="Stone_dark122" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+
+[node name="Stone_dark123" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Stone_dark124" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="Stone_dark125" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="Stone_dark127" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="Stone_dark128" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+
+[node name="Stone_dark129" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
+
+[node name="Stone_dark130" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+
+[node name="Stone_dark131" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 2)
+
+[node name="Stone_dark132" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="Stone_dark133" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
+
+[node name="Stone_dark134" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+
+[node name="Stone_dark135" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+
+[node name="Stone_dark136" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+
+[node name="Stone_dark137" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
+
+[node name="Stone_dark138" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
+
+[node name="Stone_dark139" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -12)
+
+[node name="Stone_dark140" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="Stone_dark141" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+
+[node name="Stone_dark142" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -14)
+
+[node name="Stone_dark143" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -14)
+
+[node name="Stone_dark6" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -2)
+
+[node name="Stone_dark8" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
+
+[node name="Stone_dark9" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="Stone_dark11" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 2)
+
+[node name="Stone_dark12" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 3.5)
+
+[node name="Stone_dark14" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 3.5)
+
+[node name="Stone_dark16" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 3.5)
+
+[node name="Stone_dark25" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 3.5)
+
+[node name="Stone_dark29" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 5)
+
+[node name="Stone_dark13" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="Stone_dark15" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -2)
+
+[node name="Stone_dark17" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -4)
+
+[node name="Stone_dark18" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -2)
+
+[node name="Stone_dark19" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
+
+[node name="Stone_dark20" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+
+[node name="Stone_dark21" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="Stone_dark22" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 2)
+
+[node name="Stone_dark23" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 2)
+
+[node name="Stone_dark24" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
+
+[node name="Stone_dark26" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Stone_dark27" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="Stone_dark28" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+
+[node name="Stone_dark30" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+
+[node name="Stone_dark32" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Stone_dark33" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+
+[node name="Stone_dark34" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
+
+[node name="Stone_dark36" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Stone_dark37" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Stone_dark39" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="Stone_dark40" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="Stone_dark41" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="Stone_dark42" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Stone_dark44" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+
+[node name="Stone_dark45" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Stone_dark47" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="Stone_dark48" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="Stone_dark49" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Stone_dark50" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Stone_dark52" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
+
+[node name="Stone_dark53" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+
+[node name="Stone_dark54" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -2)
+
+[node name="Stone_dark55" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -2)
+
+[node name="Stone_dark56" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
+
+[node name="Stone_dark57" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="Stone_dark58" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+
+[node name="Stone_dark59" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+
+[node name="Stone_dark60" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 2)
+
+[node name="Stone_dark63" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 6)
+
+[node name="Stone_dark64" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 4)
+
+[node name="Stone_dark65" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
+
+[node name="Stone_dark66" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 6)
+
+[node name="Stone_dark68" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 4)
+
+[node name="Stone_dark73" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+
+[node name="Stone_dark74" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="Stone_dark75" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+
+[node name="Stone_dark76" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="Stone_dark78" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="Stone_dark79" parent="LevelBlocks" instance=ExtResource("3_mltpi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
+
+[node name="Lava" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Lava2" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+
+[node name="Lava3" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+
+[node name="Lava4" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 8)
+
+[node name="Lava8" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+
+[node name="Lava9" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+
+[node name="Lava10" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="Lava11" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Lava12" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="Lava13" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Lava14" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="Lava15" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
+
+[node name="Lava16" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
+
+[node name="Lava17" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 2)
+
+[node name="Lava18" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -4)
+
+[node name="Lava19" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -2)
+
+[node name="Lava20" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -8)
+
+[node name="Lava21" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -6)
+
+[node name="Lava22" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+
+[node name="Lava23" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="Lava24" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+
+[node name="Lava25" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="Lava26" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -10)
+
+[node name="Lava27" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12)
+
+[node name="Lava28" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="Lava29" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="Lava30" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
+[node name="Lava31" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 6)
+
+[node name="Lava5" parent="LevelBlocks" instance=ExtResource("4_68yje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+
+[node name="Bricks_gray" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.00846, -2)
+
+[node name="Bricks_gray2" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.00846, -2)
+
+[node name="Bricks_gray3" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.00846, -2)
+
+[node name="Bricks_gray4" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.00846, -2)
+
+[node name="Bricks_gray5" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.00846, -2)
+
+[node name="Bricks_gray6" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.00846, -2)
+
+[node name="Bricks_gray7" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.00846, -2)
+
+[node name="Bricks_gray8" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4.00846, -2)
+
+[node name="Bricks_gray9" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.00846, -2)
+
+[node name="Bricks_gray10" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4.00846, -2)
+
+[node name="Bricks_gray11" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.00846, -2)
+
+[node name="Bricks_gray12" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4.00846, -2)
+
+[node name="Bricks_gray13" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4.00846, -2)
+
+[node name="Bricks_gray14" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.00846, -2)
+
+[node name="Bricks_gray15" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.00846, -2)
+
+[node name="Bricks_gray16" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4.00846, -2)
+
+[node name="Bricks_gray18" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.00846, -2)
+
+[node name="Bricks_gray19" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6.00846, -2)
+
+[node name="Bricks_gray20" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.00846, -2)
+
+[node name="Bricks_gray21" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6.00846, -2)
+
+[node name="Bricks_gray22" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6.00846, -2)
+
+[node name="Fence" parent="LevelBlocks" instance=ExtResource("6_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2)
+
+[node name="Fence2" parent="LevelBlocks" instance=ExtResource("6_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -2)
+
+[node name="Fence3" parent="LevelBlocks" instance=ExtResource("6_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, -2)
+
+[node name="Fence4" parent="LevelBlocks" instance=ExtResource("6_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.5, -2)
+
+[node name="Fence5" parent="LevelBlocks" instance=ExtResource("6_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, -2)
+
+[node name="Spikes" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -2)
+
+[node name="Spikes2" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8, -2)
+
+[node name="Spikes3" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8, -2)
+
+[node name="Spikes4" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, -2)
+
+[node name="Spikes5" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, -2)
+
+[node name="Spikes6" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 6, -2)
+
+[node name="Spikes7" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 6, -2)
+
+[node name="Spikes8" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 6, -2)
+
+[node name="Spikes9" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6, -2)
+
+[node name="Spikes10" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, -2)
+
+[node name="Spikes11" parent="LevelBlocks" instance=ExtResource("7_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, -2)
+
+[node name="Fence6" parent="LevelBlocks" instance=ExtResource("6_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, -2)
+
+[node name="Gravestone" parent="LevelBlocks" instance=ExtResource("8_4cdx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 2)
+
+[node name="Gravestone2" parent="LevelBlocks" instance=ExtResource("8_4cdx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 2)
+
+[node name="Gravestone3" parent="LevelBlocks" instance=ExtResource("8_4cdx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 2, 2)
+
+[node name="Gravestone4" parent="LevelBlocks" instance=ExtResource("8_4cdx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -8)
+
+[node name="Gravestone5" parent="LevelBlocks" instance=ExtResource("8_4cdx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -10)
+
+[node name="Fence7" parent="LevelBlocks" instance=ExtResource("6_53xux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, -2)
+
+[node name="Bricks_gray17" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4.00846, -2)

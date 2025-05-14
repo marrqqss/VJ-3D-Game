@@ -10,10 +10,12 @@ albedo_color = Color(0.952941, 0.109804, 0.0196078, 1)
 
 [node name="Ball" type="CharacterBody3D" groups=["ball"]]
 axis_lock_linear_y = true
+motion_mode = 1
 script = ExtResource("1_7s4qf")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 material = SubResource("StandardMaterial3D_n1dj2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_7s4qf")

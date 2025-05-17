@@ -24,7 +24,8 @@ func _on_body_entered(body: Node) -> void:
 func spawn_powerup(pos: Vector3) -> void:
 	var powerup_types = [
 		"res://scenes/expand_paddle.tscn",
-		"res://scenes/power_ball.tscn"
+		"res://scenes/power_ball.tscn",
+		"res://scenes/reduce_paddle.tscn"
 	]
 	
 	# Seleccionar un tipo aleatorio

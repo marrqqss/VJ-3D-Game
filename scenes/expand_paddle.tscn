@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://bse80xgopkujb"]
 
 [ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_hy5bx"]
-[ext_resource type="PackedScene" uid="uid://l174auflss4l" path="res://assets/resource/Copper_Bar.gltf" id="2_3un6s"]
+[ext_resource type="PackedScene" uid="uid://c3vlqn3jafgqx" path="res://assets/powerups/expand_arrows.glb" id="2_hy5bx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
-size = Vector3(0.414837, 0.255554, 0.811432)
+size = Vector3(0.414837, 0.702232, 1.99951)
 
 [node name="powerUp" type="Area3D"]
 script = ExtResource("1_hy5bx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000810623, 0.124298, -0.00184631)
+transform = Transform3D(0.0113793, 0, -0.999935, 0, 1, 0, 0.999935, 0, 0.0113793, 0.00365263, -4.19691e-05, -0.00205295)
 shape = SubResource("BoxShape3D_uk6or")
 
-[node name="Copper_Bar2" parent="." instance=ExtResource("2_3un6s")]
+[node name="expand_arrows" parent="." instance=ExtResource("2_hy5bx")]

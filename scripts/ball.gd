@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var SPEED: float = 15.0
+@export var SPEED: float = 20.0
 @export var BOUNCE: float = 1.0
 @export var attach_offset: Vector3 = Vector3(0, 0, -1)
 

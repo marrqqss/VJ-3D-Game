@@ -57,3 +57,5 @@ func apply_powerup(player: Node) -> void:
 	match powerup_type:
 		"expand_paddle":
 			player.expand_paddle()
+		"power_ball":
+			player.power_ball()

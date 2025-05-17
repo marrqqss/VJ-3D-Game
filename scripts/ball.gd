@@ -1,15 +1,22 @@
 extends CharacterBody3D
 
-@export var SPEED: float = 20.0
+@export var SPEED: float = 15.0
 @export var BOUNCE: float = 1.0
 @export var attach_offset: Vector3 = Vector3(0, 0, -1)
 
 var launched: bool = false
 var direction: Vector3 = Vector3(0, 0, 1)
 
+var power_ball_mode: bool = false
+
+
 func _ready() -> void:
 	add_to_group("ball")
 	velocity = Vector3.ZERO
+
+func set_power_ball(active: bool) -> void:
+	power_ball_mode = active
+	
 
 func _physics_process(delta: float) -> void:
 	if not launched:
@@ -47,7 +54,10 @@ func _physics_process(delta: float) -> void:
 		var col = get_last_slide_collision()
 		if col:
 			var collider = col.get_collider()
-			if collider.is_in_group("Player"):
+			if power_ball_mode and collider.is_in_group("blocks"):
+				# No rebotamos, seguimos en la misma dirección
+				pass
+			elif collider.is_in_group("Player"):
 				# bounce against the player (controled by code)
 				var local_hit = col.get_position() - collider.global_transform.origin
 				var pad_shape = collider.get_node("CollisionShape3D").shape

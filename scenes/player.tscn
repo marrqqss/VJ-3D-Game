@@ -26,3 +26,6 @@ shape = SubResource("BoxShape3D_u8vuu")
 
 [node name="expand_paddle_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="power_ball_timer" type="Timer" parent="."]
+one_shot = true

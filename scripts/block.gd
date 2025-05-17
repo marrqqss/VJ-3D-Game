@@ -22,11 +22,17 @@ func _on_body_entered(body: Node) -> void:
 	queue_free()
 
 func spawn_powerup(pos: Vector3) -> void:
-	var powerup_scene = load("res://scenes/expand_paddle.tscn")
+	var powerup_types = [
+		"res://scenes/expand_paddle.tscn",
+		"res://scenes/power_ball.tscn"
+	]
+	
+	# Seleccionar un tipo aleatorio
+	var powerup_scene = load(powerup_types[randi() % powerup_types.size()])
 	var powerup = powerup_scene.instantiate()
 	
 	# Posiciona el powerup en la ubicación del bloque
-	powerup.global_transform.origin = pos
+	powerup.transform.origin = pos
 	
 	# Añade el powerup a la escena actual
 	get_tree().current_scene.add_child(powerup)

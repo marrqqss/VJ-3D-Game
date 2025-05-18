@@ -27,9 +27,11 @@ func set_power_ball(active: bool) -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_attached_to_paddle:
-		# Mover la bola con la paleta manteniendo el offset
-		global_transform.origin = get_parent().global_transform.origin + collision_offset
-		return 
+		# Mantener posición y contrarrestar la escala del paddle
+		var parent = get_parent()
+		global_transform.origin = parent.global_transform.origin + collision_offset
+		scale = Vector3(1.0 / parent.scale.x, 1.0, 1.0)  # Invertir escala X del paddle
+		return
 	if not launched:
 		#lock to player
 		var paddle_transform = get_parent().global_transform
@@ -123,3 +125,23 @@ func _finish_launch(previous_global: Transform3D, launch_dir: Vector3):
 	velocity = direction * SPEED
 	is_attached_to_paddle = false
 	launched = true
+	
+	
+func spawn_extra_balls():
+	var angles = [30, -30]
+	var ball_scene = load("res://scenes/ball.tscn")
+	
+	for angle in angles:
+		var new_ball = ball_scene.instantiate()
+		new_ball.add_to_group("ball")
+		
+		# Heredar configuraciones de colisión
+		new_ball.collision_layer = collision_layer  # Capa 'balls' (1)
+		new_ball.collision_mask = collision_mask    # Máscara original (blocks + player)
+		
+		new_ball.global_transform = global_transform
+		new_ball.direction = -direction.rotated(Vector3.UP, deg_to_rad(angle))
+		new_ball.launched = true
+		new_ball.velocity = new_ball.direction * SPEED
+		
+		get_tree().root.add_child(new_ball)

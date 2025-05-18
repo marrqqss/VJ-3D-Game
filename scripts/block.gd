@@ -26,7 +26,8 @@ func spawn_powerup(pos: Vector3) -> void:
 		"res://scenes/expand_paddle.tscn",
 		"res://scenes/power_ball.tscn",
 		"res://scenes/reduce_paddle.tscn",
-		"res://scenes/magnet.tscn"
+		"res://scenes/magnet.tscn",
+		"res://scenes/extra_balls.tscn"
 	]
 	
 	# Seleccionar un tipo aleatorio

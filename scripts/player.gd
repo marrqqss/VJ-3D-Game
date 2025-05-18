@@ -26,6 +26,10 @@ func _input(event):
 		reduce_paddle()
 	if event.is_action_pressed("test_magnet"):
 		activate_magnet()
+	if event.is_action_pressed("test_extra_balls"):
+		var balls = get_tree().get_nodes_in_group("ball")
+		for ball in balls:
+			ball.spawn_extra_balls()
 
 
 func _physics_process(delta: float) -> void:

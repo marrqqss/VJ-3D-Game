@@ -63,3 +63,7 @@ func apply_powerup(player: Node) -> void:
 			player.power_ball()
 		"magnet":
 			player.activate_magnet()
+		"extra_balls":
+			var balls = get_tree().get_nodes_in_group("ball")
+			for ball in balls:
+				ball.spawn_extra_balls()

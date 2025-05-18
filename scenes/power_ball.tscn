@@ -9,6 +9,8 @@ radius = 0.426758
 
 [node name="powerUp" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573576, 0, 0.573576, 0.819152, 0, 0, 0)
+collision_layer = 8
+collision_mask = 22
 script = ExtResource("1_jtc8o")
 powerup_type = "power_ball"
 

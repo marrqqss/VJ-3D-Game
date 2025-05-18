@@ -7,6 +7,8 @@
 size = Vector3(0.99544, 0.35101, 0.883621)
 
 [node name="powerUp" type="Area3D"]
+collision_layer = 8
+collision_mask = 22
 script = ExtResource("1_oylys")
 powerup_type = "magnet"
 

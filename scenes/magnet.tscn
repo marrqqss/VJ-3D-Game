@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc52ueupuh0r1"]
+
+[ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_oylys"]
+[ext_resource type="PackedScene" uid="uid://dwayqgmsayjhw" path="res://assets/powerups/magnet.glb" id="2_oylys"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
+size = Vector3(0.99544, 0.35101, 0.883621)
+
+[node name="powerUp" type="Area3D"]
+script = ExtResource("1_oylys")
+powerup_type = "magnet"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0113793, 0, -0.999935, 0, 1, 0, 0.999935, 0, 0.0113793, -0.00947606, 0.0178756, 0.0142071)
+shape = SubResource("BoxShape3D_uk6or")
+
+[node name="magnet" parent="." instance=ExtResource("2_oylys")]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
+rotation_order = 1

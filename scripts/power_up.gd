@@ -61,3 +61,5 @@ func apply_powerup(player: Node) -> void:
 			player.reduce_paddle()
 		"power_ball":
 			player.power_ball()
+		"magnet":
+			player.activate_magnet()

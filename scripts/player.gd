@@ -9,6 +9,7 @@ var _current_scale_factor: float = 1.0
 # Reference to the Timer node
 var _power_ball_active: bool = false
 @onready var _power_ball_timer = $power_ball_timer
+var magnet_active: bool = false
 
 func _ready() -> void:
 	# Cache the starting scale
@@ -23,17 +24,25 @@ func _input(event):
 		power_ball()
 	if event.is_action_pressed("test_reduce_paddle"):
 		reduce_paddle()
+	if event.is_action_pressed("test_magnet"):
+		activate_magnet()
 
 
 func _physics_process(delta: float) -> void:
+	# Movimiento SIEMPRE activo (no depende de la bola)
+	var direction := Input.get_axis("ui_left", "ui_right")
+	velocity.x = direction * SPEED
+	move_and_slide()
+	
+	# Lógica de relanzamiento
+	if Input.is_action_just_pressed("ui_accept"):
+		var balls = get_tree().get_nodes_in_group("ball")
+		for ball in balls:
+			if ball.is_attached_to_paddle:
+				ball.launch_from_paddle()
+	#print consola 
 	if not _power_ball_timer.is_stopped():
 		print(_power_ball_timer.time_left)
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction != 0:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	move_and_slide()
 
 # Called by the Powerup when “expand_paddle” is picked up
 func expand_paddle() -> void:
@@ -69,3 +78,6 @@ func _on_power_ball_timeout() -> void:
 	for ball in balls:
 		if ball.has_method("set_power_ball"):
 			ball.set_power_ball(false)
+
+func activate_magnet() -> void:
+	magnet_active = true

@@ -1,13 +1,20 @@
 extends CharacterBody3D
 
-@export var SPEED: float = 20.0
+@export var SPEED: float = 15.0
 @export var BOUNCE: float = 1.0
 @export var attach_offset: Vector3 = Vector3(0, 0, -1)
+@export var ROTATION_SPEED: float = 0.4  
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 
 var launched: bool = false
 var direction: Vector3 = Vector3(0, 0, 1)
-
 var power_ball_mode: bool = false
+var current_rotation: float = 0.0
+
+var is_attached_to_paddle: bool = false
+var collision_offset: Vector3 = Vector3.ZERO
+var last_direction: Vector3 = Vector3.ZERO
+
 
 
 func _ready() -> void:
@@ -19,8 +26,11 @@ func set_power_ball(active: bool) -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if is_attached_to_paddle:
+		# Mover la bola con la paleta manteniendo el offset
+		global_transform.origin = get_parent().global_transform.origin + collision_offset
+		return 
 	if not launched:
-		
 		#lock to player
 		var paddle_transform = get_parent().global_transform
 		global_transform.origin = paddle_transform.origin + attach_offset
@@ -51,23 +61,65 @@ func _physics_process(delta: float) -> void:
 		velocity = direction * SPEED
 		move_and_slide()
 
+		  # ROTACIÓN BOLA
+		if velocity.length() > 0.01:
+			mesh_instance.look_at(global_position + velocity, Vector3.UP)
+			current_rotation -= velocity.length() * delta * ROTATION_SPEED
+			mesh_instance.rotate_object_local(Vector3(1, 0, 0), current_rotation - mesh_instance.rotation.x)
+
 		var col = get_last_slide_collision()
 		if col:
 			var collider = col.get_collider()
+			
 			if power_ball_mode and collider.is_in_group("blocks"):
-				# No rebotamos, seguimos en la misma dirección
+				# Power Ball: no rebotar
 				pass
+				
 			elif collider.is_in_group("Player"):
-				# bounce against the player (controled by code)
-				var local_hit = col.get_position() - collider.global_transform.origin
-				var pad_shape = collider.get_node("CollisionShape3D").shape
-				var half_width = pad_shape.extents.x
-				var factor = clamp(local_hit.x / half_width, -1, 1)
-
-				direction.x = factor
-				direction.z = -abs(direction.z)
-				direction = direction.normalized()
+				if collider.magnet_active:
+					last_direction = direction
+					
+					var local_hit = collider.to_local(col.get_position())
+					collision_offset = Vector3(local_hit.x, 0, -1)
+					var previous_global = global_transform
+					get_parent().remove_child(self)
+					collider.add_child(self)
+					global_transform = previous_global
+					is_attached_to_paddle = true
+					velocity = Vector3.ZERO
+				else:
+					# Rebote NORMAL con paleta
+					var local_hit = col.get_position() - collider.global_transform.origin
+					var pad_shape = collider.get_node("CollisionShape3D").shape
+					var half_width = pad_shape.extents.x
+					var factor = clamp(local_hit.x / half_width, -1, 1)
+					direction.x = factor
+					direction.z = -abs(direction.z)
+					direction = direction.normalized()
+			
 			else:
-				# bounce controled by physics
+				# Rebote con otros objetos (paredes, etc)
 				direction = direction.bounce(col.get_normal()) * BOUNCE
 				direction = direction.normalized()
+
+
+func launch_from_paddle():
+	var parent = get_parent()
+	var previous_global = global_transform
+	
+	# Calcular dirección basada en el offset LOCAL
+	var launch_dir = -last_direction.normalized()
+	
+	# Reparentear de forma segura
+	parent.call_deferred("remove_child", self)
+	get_tree().root.call_deferred("add_child", self)
+	
+	# Asegurar que se aplican los cambios en el próximo frame
+	call_deferred("_finish_launch", previous_global, launch_dir)
+
+func _finish_launch(previous_global: Transform3D, launch_dir: Vector3):
+	global_transform = previous_global
+	direction = launch_dir
+	velocity = direction * SPEED
+	is_attached_to_paddle = false
+	launched = true

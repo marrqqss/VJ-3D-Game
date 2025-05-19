@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8rfvd23tritg"]
+
+[ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_bldgy"]
+[ext_resource type="PackedScene" uid="uid://dp2y25aobsssd" path="res://assets/powerups/reduce_arrows.glb" id="2_7wb4e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
+size = Vector3(0.414837, 0.702232, 1.99951)
+
+[node name="powerUp" type="Area3D"]
+collision_layer = 8
+collision_mask = 22
+script = ExtResource("1_bldgy")
+powerup_type = "reduce_paddle"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0113793, 0, -0.999935, 0, 1, 0, 0.999935, 0, 0.0113793, 0.00365263, -4.19691e-05, -0.00205295)
+shape = SubResource("BoxShape3D_uk6or")
+
+[node name="reduce_arrows" parent="." instance=ExtResource("2_7wb4e")]

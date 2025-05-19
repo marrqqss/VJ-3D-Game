@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8melwrxtrflm"]
+
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_ypcmq"]
+[ext_resource type="PackedScene" uid="uid://wouvpw3d2on6" path="res://assets/resource/Silver_Nugget_Large.gltf" id="2_ypcmq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_as7nv"]
+size = Vector3(0.945594, 1, 0.941746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
+
+[node name="Silver_nugget" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_ypcmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)
+shape = SubResource("BoxShape3D_as7nv")
+
+[node name="Silver_Nugget_Large2" parent="." instance=ExtResource("2_ypcmq")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="HitDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_cgrg5")

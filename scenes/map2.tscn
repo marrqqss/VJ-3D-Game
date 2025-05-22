@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://djywy03ta7dga"]
+[gd_scene load_steps=16 format=3 uid="uid://djywy03ta7dga"]
 
+[ext_resource type="Shader" uid="uid://crpritlh1mm8l" path="res://shaders/map2.gdshader" id="1_ccs1r"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_hs16b"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_btxqx"]
 [ext_resource type="PackedScene" uid="uid://cxlvlvn6opgey" path="res://map_blocks/sand.tscn" id="3_lk7cf"]
@@ -7,19 +8,32 @@
 [ext_resource type="PackedScene" uid="uid://bc4njct07owjw" path="res://map_blocks/bricks.tscn" id="5_u6ti8"]
 [ext_resource type="PackedScene" uid="uid://celdosw2mxv4l" path="res://map_blocks/textiles.tscn" id="6_rutqx"]
 [ext_resource type="PackedScene" uid="uid://cpaaekstj020r" path="res://map_blocks/water.tscn" id="6_u6ti8"]
+[ext_resource type="Shader" uid="uid://d37xhv3ptc4vb" path="res://shaders/wobble_heat.gdshader" id="9_hs16b"]
+[ext_resource type="Texture2D" uid="uid://no84e5lgxsjf" path="res://assets/images/plUPA.jpg" id="10_btxqx"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hs16b"]
+shader = ExtResource("1_ccs1r")
+shader_parameter/time_speed = 0.3
 
-[sub_resource type="Sky" id="Sky_ig7tw"]
-sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+[sub_resource type="Sky" id="Sky_btxqx"]
+sky_material = SubResource("ShaderMaterial_hs16b")
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 2
-sky = SubResource("Sky_ig7tw")
+sky = SubResource("Sky_btxqx")
+sky_custom_fov = 180.0
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btxqx"]
+render_priority = 0
+shader = ExtResource("9_hs16b")
+shader_parameter/time_speed = 0.1
+shader_parameter/max_shift = 1.973
+shader_parameter/noise_texture = ExtResource("10_btxqx")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btxqx"]
+viewport_path = NodePath("Dust/SubViewport")
 
 [node name="Main" type="Node3D"]
 
@@ -671,3 +685,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, 4)
 
 [node name="Sand22" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -4)
+
+[node name="Dust" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 16, 1.5)
+material_override = SubResource("ShaderMaterial_btxqx")
+cast_shadow = 0
+gi_mode = 0
+texture = SubResource("ViewportTexture_btxqx")
+
+[node name="SubViewport" type="SubViewport" parent="Dust"]
+size = Vector2i(5000, 5000)

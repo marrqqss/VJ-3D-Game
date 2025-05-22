@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://7jycrh73urcw"]
+[gd_scene load_steps=14 format=3 uid="uid://7jycrh73urcw"]
 
+[ext_resource type="Shader" uid="uid://degwhmxxbgbd" path="res://shaders/map5.gdshader" id="1_3l5go"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_bexgc"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_noo1g"]
 [ext_resource type="PackedScene" uid="uid://cpaaekstj020r" path="res://map_blocks/water.tscn" id="3_3rl6u"]
@@ -7,12 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://dfm61yh2ftvvo" path="res://map_blocks/candle_small.tscn" id="4_vmaf8"]
 [ext_resource type="PackedScene" uid="uid://cskn72mesxb77" path="res://map_blocks/candle_pack.tscn" id="6_3l5go"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ip23h"]
+shader = ExtResource("1_3l5go")
+shader_parameter/base_color = Color(0.0155352, 0.055914, 0.121854, 1)
+shader_parameter/cloud_speed = 0.1
+shader_parameter/cloud_scale = 2.0
+shader_parameter/cloud_contrast = 8.0
 
 [sub_resource type="Sky" id="Sky_ig7tw"]
-sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+sky_material = SubResource("ShaderMaterial_ip23h")
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 2
@@ -359,8 +363,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 
 [node name="Candle_pack" parent="LevelBlocks" instance=ExtResource("6_3l5go")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 2)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="Rain" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.5, 1.5)
+cast_shadow = 0
+gi_mode = 0
 amount = 10000
 lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_vmaf8")

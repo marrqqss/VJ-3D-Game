@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcprdjt3mj7rq"]
+[gd_scene load_steps=14 format=3 uid="uid://bcprdjt3mj7rq"]
 
+[ext_resource type="Shader" uid="uid://s2sfm41k3657" path="res://shaders/map1.gdshader" id="1_5vo6v"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_v7ld6"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_x0ugi"]
 [ext_resource type="PackedScene" uid="uid://cebobf4k7ubhw" path="res://map_blocks/barrels.tscn" id="3_2m3eu"]
@@ -10,17 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://dqur82o28nq3n" path="res://map_blocks/stone.tscn" id="3_x0ugi"]
 [ext_resource type="PackedScene" uid="uid://cmvs7ll62nx6a" path="res://map_blocks/gravel.tscn" id="8_raiux"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k348l"]
+shader = ExtResource("1_5vo6v")
+shader_parameter/time_speed = 0.8
 
-[sub_resource type="Sky" id="Sky_ig7tw"]
-sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+[sub_resource type="Sky" id="Sky_srta2"]
+sky_material = SubResource("ShaderMaterial_k348l")
+radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 2
-sky = SubResource("Sky_ig7tw")
-tonemap_mode = 2
+sky = SubResource("Sky_srta2")
+sky_custom_fov = 180.0
 glow_enabled = true
 
 [node name="Main" type="Node3D"]

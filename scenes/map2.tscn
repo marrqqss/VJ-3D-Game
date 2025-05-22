@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djywy03ta7dga"]
+[gd_scene load_steps=18 format=3 uid="uid://djywy03ta7dga"]
 
 [ext_resource type="Shader" uid="uid://crpritlh1mm8l" path="res://shaders/map2.gdshader" id="1_ccs1r"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_hs16b"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bc4njct07owjw" path="res://map_blocks/bricks.tscn" id="5_u6ti8"]
 [ext_resource type="PackedScene" uid="uid://celdosw2mxv4l" path="res://map_blocks/textiles.tscn" id="6_rutqx"]
 [ext_resource type="PackedScene" uid="uid://cpaaekstj020r" path="res://map_blocks/water.tscn" id="6_u6ti8"]
+[ext_resource type="PackedScene" uid="uid://cb3l5dfe31p4k" path="res://map_blocks/skeleton.tscn" id="9_cljsr"]
 [ext_resource type="Shader" uid="uid://d37xhv3ptc4vb" path="res://shaders/wobble_heat.gdshader" id="9_hs16b"]
 [ext_resource type="Texture2D" uid="uid://no84e5lgxsjf" path="res://assets/images/plUPA.jpg" id="10_btxqx"]
 
@@ -24,6 +25,14 @@ sky = SubResource("Sky_btxqx")
 sky_custom_fov = 180.0
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cljsr"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.878431, 0.721569, 0.490196, 1)
+metallic_specular = 0.95
+roughness = 0.24
+normal_scale = 5.0
+refraction_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btxqx"]
 render_priority = 0
@@ -47,25 +56,26 @@ shadow_enabled = true
 
 [node name="Foundation" type="CSGCombiner3D" parent="."]
 transform = Transform3D(3.2, 0, 0, 0, 1, 0, 0, 0, 3.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_cljsr")
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11279, 0.00371203, 0, -0.756495)
+transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11277, 0.00371203, 0, -0.756495)
 use_collision = true
 size = Vector3(9.53385, 1, 9.96045)
 
 [node name="Wall" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.224, 0.000141441, 1.44794, -5.80788)
+transform = Transform3D(0.916181, 0, 0, 0, 2.72278, 0, 0, 0, 1.22396, 0.000141441, 1.44794, -5.80788)
 use_collision = true
 size = Vector3(13.6, 0.7, 0.8)
 
 [node name="Wall2" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, -5.79103, 1.44794, -0.2745)
+transform = Transform3D(0.916201, 0, 0, 0, 2.72278, 0, 0, 0, 1.11277, -5.79103, 1.44794, -0.2745)
 use_collision = true
 size = Vector3(0.970215, 0.7, 9.09488)
 
 [node name="Wall3" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11279, 5.78534, 1.44794, -0.271652)
+transform = Transform3D(0.916203, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, 5.78534, 1.44794, -0.271652)
 use_collision = true
 size = Vector3(1, 0.7, 9.1)
 
@@ -685,6 +695,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.00846004, 4)
 
 [node name="Sand22" parent="LevelBlocks" instance=ExtResource("3_lk7cf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.00846004, -4)
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="Skeleton" parent="Characters" instance=ExtResource("9_cljsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3.5, 2)
+
+[node name="Skeleton2" parent="Characters" instance=ExtResource("9_cljsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 9.5, -4)
+
+[node name="Skeleton3" parent="Characters" instance=ExtResource("9_cljsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 5.5, -14)
 
 [node name="Dust" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 16, 1.5)

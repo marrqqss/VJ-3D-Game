@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://brlitfkqjp8ov"]
+[gd_scene load_steps=26 format=3 uid="uid://brlitfkqjp8ov"]
 
 [ext_resource type="Shader" uid="uid://dq8ifb5bshpna" path="res://shaders/map3.gdshader" id="1_0yy7v"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_53xux"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dxf6nop0dn64v" path="res://map_blocks/fence.tscn" id="6_53xux"]
 [ext_resource type="PackedScene" uid="uid://r0d1yjk0gwr6" path="res://map_blocks/spikes.tscn" id="7_53xux"]
 [ext_resource type="PackedScene" uid="uid://cldfhdqw3ugrn" path="res://map_blocks/gravestone.tscn" id="8_4cdx2"]
+[ext_resource type="PackedScene" uid="uid://d0nbawebu43v6" path="res://map_blocks/warrior.tscn" id="10_dx867"]
+[ext_resource type="PackedScene" uid="uid://d4k8850evpbiy" path="res://map_blocks/skeleton_warrior.tscn" id="11_lrbqd"]
+[ext_resource type="PackedScene" uid="uid://cb3l5dfe31p4k" path="res://map_blocks/skeleton.tscn" id="12_lrbqd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gidj7"]
 shader = ExtResource("1_0yy7v")
@@ -30,6 +33,15 @@ ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrbqd"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.223103, 0.223103, 0.223103, 1)
+normal_scale = 5.0
+rim_enabled = true
+rim = 0.05
+rim_tint = 0.57
+refraction_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_4cdx2"]
 offsets = PackedFloat32Array(0, 0.490909, 1)
@@ -96,25 +108,26 @@ shadow_enabled = true
 
 [node name="Foundation" type="CSGCombiner3D" parent="."]
 transform = Transform3D(3.2, 0, 0, 0, 1, 0, 0, 0, 3.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_lrbqd")
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11279, 0.00371203, 0, -0.756495)
+transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11277, 0.00371203, 0, -0.756495)
 use_collision = true
 size = Vector3(9.53385, 1, 9.96045)
 
 [node name="Wall" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.224, 0.000141441, 1.44794, -5.80788)
+transform = Transform3D(0.916181, 0, 0, 0, 2.72278, 0, 0, 0, 1.22396, 0.000141441, 1.44794, -5.80788)
 use_collision = true
 size = Vector3(13.6, 0.7, 0.8)
 
 [node name="Wall2" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, -5.79103, 1.44794, -0.2745)
+transform = Transform3D(0.916201, 0, 0, 0, 2.72278, 0, 0, 0, 1.11277, -5.79103, 1.44794, -0.2745)
 use_collision = true
 size = Vector3(0.970215, 0.7, 9.09488)
 
 [node name="Wall3" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11279, 5.78534, 1.44794, -0.271652)
+transform = Transform3D(0.916203, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, 5.78534, 1.44794, -0.271652)
 use_collision = true
 size = Vector3(1, 0.7, 9.1)
 
@@ -688,3 +701,14 @@ visibility_aabb = AABB(-64.0013, -59.4424, -56.6419, 115.496, 60.4421, 122.601)
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_gidj7")
 draw_pass_1 = SubResource("QuadMesh_lrbqd")
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="Warrior" parent="Characters" instance=ExtResource("10_dx867")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3.5, 2)
+
+[node name="Skeleton_warrior" parent="Characters" instance=ExtResource("11_lrbqd")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 3.5, 2)
+
+[node name="Skeleton" parent="Characters" instance=ExtResource("12_lrbqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3.5, -10)

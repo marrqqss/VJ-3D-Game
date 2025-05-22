@@ -27,14 +27,14 @@ glow_enabled = true
 offsets = PackedFloat32Array(0, 0.490909, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_m6o67"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i4bwb"]
 gradient = SubResource("Gradient_i4bwb")
 
 [sub_resource type="Curve" id="Curve_eefgs"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0882353, 1), 0.0, 0.0, 0, 0, Vector2(0.992647, 0.426966), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_xng1r"]
+[sub_resource type="CurveTexture" id="CurveTexture_m6o67"]
 curve = SubResource("Curve_eefgs")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cpu1c"]
@@ -50,19 +50,19 @@ tangential_accel_min = -8.0
 tangential_accel_max = 8.0
 damping_max = 4.0
 scale_min = 0.5
-scale_curve = SubResource("CurveTexture_xng1r")
-color_ramp = SubResource("GradientTexture1D_m6o67")
+scale_curve = SubResource("CurveTexture_m6o67")
+color_ramp = SubResource("GradientTexture1D_i4bwb")
 
-[sub_resource type="Gradient" id="Gradient_ccslo"]
+[sub_resource type="Gradient" id="Gradient_eefgs"]
 offsets = PackedFloat32Array(0.324561, 0.736842)
 colors = PackedColorArray(1, 1, 1, 1, 0.211765, 0.211765, 0.211765, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dolx6"]
-gradient = SubResource("Gradient_ccslo")
+gradient = SubResource("Gradient_eefgs")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2cge"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xng1r"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -71,7 +71,7 @@ billboard_mode = 1
 billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_6nn78"]
-material = SubResource("StandardMaterial3D_b2cge")
+material = SubResource("StandardMaterial3D_xng1r")
 
 [node name="Main" type="Node3D"]
 

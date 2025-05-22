@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://7jycrh73urcw"]
+[gd_scene load_steps=13 format=3 uid="uid://7jycrh73urcw"]
 
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_bexgc"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_noo1g"]
@@ -20,55 +20,27 @@ sky = SubResource("Sky_ig7tw")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="Gradient" id="Gradient_vmaf8"]
-offsets = PackedFloat32Array(0, 0.490909, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_m6o67"]
-gradient = SubResource("Gradient_vmaf8")
-
-[sub_resource type="Curve" id="Curve_3l5go"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0882353, 1), 0.0, 0.0, 0, 0, Vector2(0.992647, 0.426966), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_xng1r"]
-curve = SubResource("Curve_3l5go")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ip23h"]
-emission_shape = 3
-emission_box_extents = Vector3(32, 0, 32)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vmaf8"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 direction = Vector3(0, -1, 0)
-initial_velocity_min = 3.0
+spread = 0.0
+flatness = 1.0
+initial_velocity_min = 6.0
 initial_velocity_max = 6.0
-gravity = Vector3(0, -5.5, 0)
-radial_accel_min = -4.0
-radial_accel_max = 4.0
-tangential_accel_min = -8.0
-tangential_accel_max = 8.0
-damping_max = 4.0
-scale_min = 0.5
-scale_curve = SubResource("CurveTexture_xng1r")
-color_ramp = SubResource("GradientTexture1D_m6o67")
 
-[sub_resource type="Gradient" id="Gradient_ccslo"]
-offsets = PackedFloat32Array(0.324561, 0.736842)
-colors = PackedColorArray(1, 1, 1, 1, 0.211765, 0.211765, 0.211765, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bexgc"]
-gradient = SubResource("Gradient_ccslo")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2cge"]
-transparency = 1
-shading_mode = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmaf8"]
 vertex_color_use_as_albedo = true
-albedo_texture = SubResource("GradientTexture2D_bexgc")
-billboard_mode = 1
-billboard_keep_scale = true
+albedo_color = Color(0.619608, 0.905882, 1, 1)
 
-[sub_resource type="QuadMesh" id="QuadMesh_noo1g"]
-material = SubResource("StandardMaterial3D_b2cge")
+[sub_resource type="SphereMesh" id="SphereMesh_3l5go"]
+material = SubResource("StandardMaterial3D_vmaf8")
+radius = 0.01
+height = 0.5
 
 [node name="Main" type="Node3D"]
 
@@ -387,11 +359,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 
 [node name="Candle_pack" parent="LevelBlocks" instance=ExtResource("6_3l5go")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 2)
 
-[node name="Rain" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
-amount = 256
-lifetime = 6.0
-visibility_aabb = AABB(-64.0013, -59.4424, -56.6419, 115.496, 60.4421, 122.601)
-trail_enabled = true
-process_material = SubResource("ParticleProcessMaterial_ip23h")
-draw_pass_1 = SubResource("QuadMesh_noo1g")
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.5, 1.5)
+amount = 10000
+lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_vmaf8")
+draw_pass_1 = SubResource("SphereMesh_3l5go")

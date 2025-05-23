@@ -9,6 +9,8 @@ size = Vector3(0.945594, 1, 0.941746)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
 
 [node name="Bricks_gray" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 19
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true

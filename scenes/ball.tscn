@@ -1,21 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0ekue5jle6kp"]
 
 [ext_resource type="Script" uid="uid://c3quu267qxuh" path="res://scripts/ball.gd" id="1_7s4qf"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1dj2"]
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.952941, 0.109804, 0.0196078, 1)
+[ext_resource type="ArrayMesh" uid="uid://cnoxntmmtbkls" path="res://assets/powerups/ball.obj" id="2_cxlvu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7s4qf"]
 
 [node name="Ball" type="CharacterBody3D" groups=["ball"]]
+collision_mask = 22
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_7s4qf")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-material = SubResource("StandardMaterial3D_n1dj2")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_7s4qf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.0256363, 0)
+mesh = ExtResource("2_cxlvu")

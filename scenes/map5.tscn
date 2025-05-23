@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://7jycrh73urcw"]
+[gd_scene load_steps=16 format=3 uid="uid://7jycrh73urcw"]
 
 [ext_resource type="Shader" uid="uid://degwhmxxbgbd" path="res://shaders/map5.gdshader" id="1_3l5go"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_bexgc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://qhg5x73fac0d" path="res://map_blocks/wood.tscn" id="4_e0umb"]
 [ext_resource type="PackedScene" uid="uid://dfm61yh2ftvvo" path="res://map_blocks/candle_small.tscn" id="4_vmaf8"]
 [ext_resource type="PackedScene" uid="uid://cskn72mesxb77" path="res://map_blocks/candle_pack.tscn" id="6_3l5go"]
+[ext_resource type="PackedScene" uid="uid://c8nt3n5j8jb1a" path="res://map_blocks/mage.tscn" id="8_ip23h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ip23h"]
 shader = ExtResource("1_3l5go")
@@ -23,6 +24,14 @@ background_mode = 2
 sky = SubResource("Sky_ig7tw")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3l5go"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.0181949, 0.228131, 0.542668, 1)
+metallic_specular = 0.95
+roughness = 0.24
+normal_scale = 5.0
+refraction_enabled = true
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vmaf8"]
 emission_shape = 6
@@ -58,25 +67,26 @@ shadow_enabled = true
 
 [node name="Foundation" type="CSGCombiner3D" parent="."]
 transform = Transform3D(3.2, 0, 0, 0, 1, 0, 0, 0, 3.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3l5go")
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11279, 0.00371203, 0, -0.756495)
+transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11277, 0.00371203, 0, -0.756495)
 use_collision = true
 size = Vector3(9.53385, 1, 9.96045)
 
 [node name="Wall" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.224, 0.000141441, 1.44794, -5.80788)
+transform = Transform3D(0.916181, 0, 0, 0, 2.72278, 0, 0, 0, 1.22396, 0.000141441, 1.44794, -5.80788)
 use_collision = true
 size = Vector3(13.6, 0.7, 0.8)
 
 [node name="Wall2" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, -5.79103, 1.44794, -0.2745)
+transform = Transform3D(0.916201, 0, 0, 0, 2.72278, 0, 0, 0, 1.11277, -5.79103, 1.44794, -0.2745)
 use_collision = true
 size = Vector3(0.970215, 0.7, 9.09488)
 
 [node name="Wall3" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11279, 5.78534, 1.44794, -0.271652)
+transform = Transform3D(0.916203, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, 5.78534, 1.44794, -0.271652)
 use_collision = true
 size = Vector3(1, 0.7, 9.1)
 
@@ -225,9 +235,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
 [node name="Candle_small" parent="LevelBlocks" instance=ExtResource("4_vmaf8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 0)
 
-[node name="Candle_small2" parent="LevelBlocks" instance=ExtResource("4_vmaf8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -4)
-
 [node name="Water15" parent="LevelBlocks" instance=ExtResource("3_3rl6u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
@@ -371,3 +378,6 @@ amount = 10000
 lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_vmaf8")
 draw_pass_1 = SubResource("SphereMesh_3l5go")
+
+[node name="Mage" parent="." instance=ExtResource("8_ip23h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -4)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bpnww41ipkl7n"]
+[gd_scene load_steps=24 format=3 uid="uid://bpnww41ipkl7n"]
 
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_i4bwb"]
 [ext_resource type="Shader" uid="uid://tqanbjnlnb27" path="res://shaders/map4.gdshader" id="1_m6o67"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dqpxvhfa8ofio" path="res://map_blocks/dead_tree.tscn" id="7_i4bwb"]
 [ext_resource type="PackedScene" uid="uid://b8melwrxtrflm" path="res://map_blocks/silver_nugget.tscn" id="8_3suj6"]
 [ext_resource type="PackedScene" uid="uid://cmvs7ll62nx6a" path="res://map_blocks/gravel.tscn" id="8_b2cge"]
+[ext_resource type="PackedScene" uid="uid://rud4n3a6n2bk" path="res://map_blocks/skeleton_hood.tscn" id="11_eefgs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eefgs"]
 shader = ExtResource("1_m6o67")
@@ -28,8 +29,11 @@ fog_sun_scatter = 0.5
 fog_sky_affect = 0.7
 fog_depth_end = 1062.6
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.04
 volumetric_fog_emission = Color(0.635464, 0.826675, 0.98, 1)
+volumetric_fog_anisotropy = -0.9
 volumetric_fog_length = 20.0
+volumetric_fog_ambient_inject = 1.26
 
 [sub_resource type="Gradient" id="Gradient_i4bwb"]
 offsets = PackedFloat32Array(0, 0.490909, 1)
@@ -514,3 +518,14 @@ visibility_aabb = AABB(-64.0013, -59.4424, -56.6419, 115.496, 60.4421, 122.601)
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_cpu1c")
 draw_pass_1 = SubResource("QuadMesh_6nn78")
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="Skeleton_hood" parent="Characters" instance=ExtResource("11_eefgs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5.5, -4)
+
+[node name="Skeleton_hood2" parent="Characters" instance=ExtResource("11_eefgs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.5, -10)
+
+[node name="Skeleton_hood3" parent="Characters" instance=ExtResource("11_eefgs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 7.5, -10)

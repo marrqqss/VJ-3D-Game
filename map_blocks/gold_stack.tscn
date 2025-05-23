@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4li0e67kue6g"]
+
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_10jgh"]
+[ext_resource type="PackedScene" uid="uid://be2ni8d8d3et6" path="res://assets/resource/Gold_Bars_Stack_Large.gltf" id="2_10jgh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_10jgh"]
+size = Vector3(0.945594, 1, 0.941746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
+
+[node name="Gold_stack" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_10jgh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)
+shape = SubResource("BoxShape3D_10jgh")
+
+[node name="Gold_Bars_Stack_Large2" parent="." instance=ExtResource("2_10jgh")]
+transform = Transform3D(1.2, 0, 0, 0, 1.3, 0, 0, 0, 1.2, 0, -1, 0)
+
+[node name="HitDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_cgrg5")

@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cskn72mesxb77"]
+
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_08apr"]
+[ext_resource type="PackedScene" uid="uid://b00g7wyux7q4g" path="res://assets/spooktober/candleBundle.gltf.glb" id="2_08apr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b0x1e"]
+size = Vector3(0.945594, 1, 0.941746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
+
+[node name="Candle_pack" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_08apr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)
+shape = SubResource("BoxShape3D_b0x1e")
+
+[node name="candleBundle_gltf" parent="." instance=ExtResource("2_08apr")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(0.541176, 0.388235, 0, 1)
+light_energy = 16.0
+light_size = 0.667
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.241724, 0.713926, 0)
+light_color = Color(0.541176, 0.388235, 0, 1)
+light_energy = 16.0
+light_size = 0.667
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.066992, 0.287657, -0.168495)
+light_color = Color(0.541176, 0.388235, 0, 1)
+light_energy = 16.0
+light_size = 0.667
+
+[node name="HitDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_cgrg5")

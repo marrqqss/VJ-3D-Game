@@ -33,36 +33,34 @@ func _physics_process(delta: float) -> void:
 		scale = Vector3(1.0 / parent.scale.x, 1.0, 1.0)  # Invertir escala X del paddle
 		return
 	if not launched:
+  
 		#lock to player
 		var paddle_transform = get_parent().global_transform
 		global_transform.origin = paddle_transform.origin + attach_offset
 
-		
 		if Input.is_action_just_pressed("ui_accept"):
-			#unlock from player
-			var was_global = global_transform
+			# — launch ball —
+			var saved_tf = global_transform
 			var root = get_tree().get_current_scene()
 			get_parent().remove_child(self)
 			root.add_child(self)
-			global_transform = was_global
+			global_transform = saved_tf
 			launched = true
 
 			var move_input = Input.get_axis("ui_left", "ui_right")
-			if move_input < 0:
-				direction = Vector3(-1, 0, -1)
-			elif move_input > 0:
-				direction = Vector3( 1, 0, -1)
-			else:
-				direction = Vector3( 0, 0, -1)
-			direction = direction.normalized()
+			direction = Vector3(move_input, 0, -1).normalized()
 			velocity  = direction * SPEED
 
-
 	else:
-		direction = direction.normalized()
+		# 1. Reset velocity to exact SPEED in the desired direction
 		velocity = direction * SPEED
+
+		# 2. Let the physics engine move & slide
 		move_and_slide()
 
+		# 3. Clamp back to exact SPEED  
+		#    (whatever tiny loss happened internally is wiped out)
+		velocity = velocity.normalized() * SPEED
 		  # ROTACIÓN BOLA
 		if velocity.length() > 0.01:
 			mesh_instance.look_at(global_position + velocity, Vector3.UP)
@@ -71,6 +69,7 @@ func _physics_process(delta: float) -> void:
 
 		var col = get_last_slide_collision()
 		if col:
+			var normal = col.get_normal()
 			var collider = col.get_collider()
 			
 			if power_ball_mode and collider.is_in_group("blocks"):

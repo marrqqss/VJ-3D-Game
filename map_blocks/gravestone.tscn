@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cldfhdqw3ugrn"]
+
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_oap0v"]
+[ext_resource type="PackedScene" uid="uid://cl28vv1rl3gxv" path="res://assets/spooktober/gravestone.gltf.glb" id="2_oap0v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_as7nv"]
+size = Vector3(0.945594, 1, 0.941746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
+
+[node name="Gravestone" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_oap0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)
+shape = SubResource("BoxShape3D_as7nv")
+
+[node name="gravestone_gltf" parent="." instance=ExtResource("2_oap0v")]
+transform = Transform3D(1.2, 0, 0, 0, 1.08, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="HitDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_cgrg5")

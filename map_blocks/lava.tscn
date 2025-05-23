@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://bktc0onr5lusn"]
+
+[ext_resource type="Script" uid="uid://duog8lsk73o0o" path="res://scripts/block.gd" id="1_01neo"]
+[ext_resource type="PackedScene" uid="uid://bj7omuq28ae7j" path="res://assets/blocks/lava.gltf" id="2_01neo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c4gt8"]
+size = Vector3(0.945594, 1, 0.941746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrg5"]
+
+[node name="Lava" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_01neo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)
+shape = SubResource("BoxShape3D_c4gt8")
+
+[node name="lava2" parent="." instance=ExtResource("2_01neo")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lava2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988653, 0)
+light_color = Color(0.996078, 0.368627, 0.0941176, 1)
+light_energy = 8.0
+light_specular = 0.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="lava2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.0113471, 0)
+light_color = Color(0.996078, 0.368627, 0.0941176, 1)
+light_energy = 8.0
+light_specular = 0.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="lava2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0113471, 1)
+light_color = Color(0.996078, 0.368627, 0.0941176, 1)
+light_energy = 8.0
+light_specular = 0.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="lava2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0113471, -1)
+light_color = Color(0.996078, 0.368627, 0.0941176, 1)
+light_energy = 8.0
+light_specular = 0.0
+
+[node name="HitDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_cgrg5")

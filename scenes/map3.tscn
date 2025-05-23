@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://brlitfkqjp8ov"]
+[gd_scene load_steps=27 format=3 uid="uid://brlitfkqjp8ov"]
 
 [ext_resource type="Shader" uid="uid://dq8ifb5bshpna" path="res://shaders/map3.gdshader" id="1_0yy7v"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_53xux"]
+[ext_resource type="Script" uid="uid://dntg20i58gg37" path="res://scripts/map_cinematic.gd" id="1_twb3g"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_4cdx2"]
 [ext_resource type="PackedScene" uid="uid://8bp1g3heak0a" path="res://map_blocks/stone_dark.tscn" id="3_mltpi"]
 [ext_resource type="PackedScene" uid="uid://bktc0onr5lusn" path="res://map_blocks/lava.tscn" id="4_68yje"]
@@ -95,6 +96,7 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_xng1r")
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_twb3g")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
@@ -130,10 +132,6 @@ size = Vector3(0.970215, 0.7, 9.09488)
 transform = Transform3D(0.916203, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, 5.78534, 1.44794, -0.271652)
 use_collision = true
 size = Vector3(1, 0.7, 9.1)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.642787, 0.766045, 0, -0.766045, 0.642787, -0.4, 48.4, 40.9)
-fov = 31.7
 
 [node name="Player" parent="." instance=ExtResource("1_53xux")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 16.2)
@@ -712,3 +710,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 3.5
 
 [node name="Skeleton" parent="Characters" instance=ExtResource("12_lrbqd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3.5, -10)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, -1.33939e-07, 1.12389e-07, 7.10543e-15, 0.642788, 0.766044, -1.74846e-07, -0.766044, 0.642788, 0, 48.4, 40.9)
+fov = 31.7

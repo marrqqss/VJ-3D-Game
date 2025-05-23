@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://djywy03ta7dga"]
+[gd_scene load_steps=19 format=3 uid="uid://djywy03ta7dga"]
 
 [ext_resource type="Shader" uid="uid://crpritlh1mm8l" path="res://shaders/map2.gdshader" id="1_ccs1r"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_hs16b"]
+[ext_resource type="Script" uid="uid://dntg20i58gg37" path="res://scripts/map_cinematic.gd" id="1_xbw1t"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_btxqx"]
 [ext_resource type="PackedScene" uid="uid://cxlvlvn6opgey" path="res://map_blocks/sand.tscn" id="3_lk7cf"]
 [ext_resource type="PackedScene" uid="uid://b4li0e67kue6g" path="res://map_blocks/gold_stack.tscn" id="4_rtqf6"]
@@ -42,9 +43,10 @@ shader_parameter/max_shift = 1.973
 shader_parameter/noise_texture = ExtResource("10_btxqx")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_btxqx"]
-viewport_path = NodePath("Dust/SubViewport")
+viewport_path = NodePath("CameraPivot/Dust/SubViewport")
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_xbw1t")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
@@ -78,10 +80,6 @@ size = Vector3(0.970215, 0.7, 9.09488)
 transform = Transform3D(0.916203, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, 5.78534, 1.44794, -0.271652)
 use_collision = true
 size = Vector3(1, 0.7, 9.1)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.642787, 0.766045, 0, -0.766045, 0.642787, -0.4, 48.4, 40.9)
-fov = 31.7
 
 [node name="Player" parent="." instance=ExtResource("1_hs16b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 16.2)
@@ -707,12 +705,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 9.5, -4)
 [node name="Skeleton3" parent="Characters" instance=ExtResource("9_cljsr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 5.5, -14)
 
-[node name="Dust" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 16, 1.5)
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, -1.33939e-07, 1.12389e-07, 7.10543e-15, 0.642788, 0.766044, -1.74846e-07, -0.766044, 0.642788, 0, 48.4, 40.9)
+fov = 31.7
+
+[node name="Dust" type="Sprite3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 33.5, 10.5)
 material_override = SubResource("ShaderMaterial_btxqx")
 cast_shadow = 0
 gi_mode = 0
 texture = SubResource("ViewportTexture_btxqx")
 
-[node name="SubViewport" type="SubViewport" parent="Dust"]
+[node name="SubViewport" type="SubViewport" parent="CameraPivot/Dust"]
 size = Vector2i(5000, 5000)

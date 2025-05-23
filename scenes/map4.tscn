@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://bpnww41ipkl7n"]
+[gd_scene load_steps=26 format=3 uid="uid://bpnww41ipkl7n"]
 
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_i4bwb"]
 [ext_resource type="Shader" uid="uid://tqanbjnlnb27" path="res://shaders/map4.gdshader" id="1_m6o67"]
+[ext_resource type="Script" uid="uid://dntg20i58gg37" path="res://scripts/map_cinematic.gd" id="1_xng1r"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_m6o67"]
 [ext_resource type="PackedScene" uid="uid://c203oqew6rq2c" path="res://map_blocks/gold_rock.tscn" id="3_eefgs"]
 [ext_resource type="PackedScene" uid="uid://bccoehfaoreo5" path="res://map_blocks/snow.tscn" id="5_22lrh"]
@@ -34,6 +35,13 @@ volumetric_fog_emission = Color(0.635464, 0.826675, 0.98, 1)
 volumetric_fog_anisotropy = -0.9
 volumetric_fog_length = 20.0
 volumetric_fog_ambient_inject = 1.26
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpu1c"]
+vertex_color_use_as_albedo = true
+metallic_specular = 0.95
+roughness = 0.24
+normal_scale = 5.0
+refraction_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_i4bwb"]
 offsets = PackedFloat32Array(0, 0.490909, 1)
@@ -86,6 +94,7 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_xng1r")
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_xng1r")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
@@ -96,31 +105,28 @@ shadow_enabled = true
 
 [node name="Foundation" type="CSGCombiner3D" parent="."]
 transform = Transform3D(3.2, 0, 0, 0, 1, 0, 0, 0, 3.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_cpu1c")
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11279, 0.00371203, 0, -0.756495)
+transform = Transform3D(1.30885, 0, 0, 0, 1, 0, 0, 0, 1.11277, 0.00371203, 0, -0.756495)
 use_collision = true
 size = Vector3(9.53385, 1, 9.96045)
 
 [node name="Wall" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.224, 0.000141441, 1.44794, -5.80788)
+transform = Transform3D(0.916181, 0, 0, 0, 2.72278, 0, 0, 0, 1.22396, 0.000141441, 1.44794, -5.80788)
 use_collision = true
 size = Vector3(13.6, 0.7, 0.8)
 
 [node name="Wall2" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, -5.79103, 1.44794, -0.2745)
+transform = Transform3D(0.916201, 0, 0, 0, 2.72278, 0, 0, 0, 1.11277, -5.79103, 1.44794, -0.2745)
 use_collision = true
 size = Vector3(0.970215, 0.7, 9.09488)
 
 [node name="Wall3" type="CSGBox3D" parent="Foundation"]
-transform = Transform3D(0.916208, 0, 0, 0, 2.72278, 0, 0, 0, 1.11279, 5.78534, 1.44794, -0.271652)
+transform = Transform3D(0.916203, 0, 0, 0, 2.72278, 0, 0, 0, 1.11278, 5.78534, 1.44794, -0.271652)
 use_collision = true
 size = Vector3(1, 0.7, 9.1)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.642787, 0.766045, 0, -0.766045, 0.642787, -0.4, 48.4, 40.9)
-fov = 31.7
 
 [node name="Player" parent="." instance=ExtResource("1_i4bwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 16.2)
@@ -529,3 +535,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.5, -10)
 
 [node name="Skeleton_hood3" parent="Characters" instance=ExtResource("11_eefgs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 7.5, -10)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, -1.33939e-07, 1.12389e-07, 7.10543e-15, 0.642788, 0.766044, -1.74846e-07, -0.766044, 0.642788, 0, 48.4, 40.9)
+fov = 31.7

@@ -8,14 +8,11 @@ var _current_scale_factor: float = 1.0
 
 # Reference to the Timer node
 var _power_ball_active: bool = false
-@onready var _power_ball_timer = $power_ball_timer
 var magnet_active: bool = false
 
 func _ready() -> void:
 	# Cache the starting scale
 	_orig_scale = scale
-	# Connect the timer’s timeout
-	_power_ball_timer.connect("timeout", Callable(self, "_on_power_ball_timeout"))
 
 func _input(event):
 	if event.is_action_pressed("test_expand_paddle"):
@@ -30,6 +27,14 @@ func _input(event):
 		var balls = get_tree().get_nodes_in_group("ball")
 		for ball in balls:
 			ball.spawn_extra_balls()
+	if event.is_action_pressed("test_speed_ball"):
+		speed_ball()
+	if event.is_action_pressed("test_slow_ball"):
+		slow_ball()
+	if event.is_action_pressed("test_normal_ball"):
+		normal_ball()
+	if event.is_action_pressed("test_explosive_ball"):
+		explosive_ball()
 
 
 func _physics_process(delta: float) -> void:
@@ -44,9 +49,13 @@ func _physics_process(delta: float) -> void:
 		for ball in balls:
 			if ball.is_attached_to_paddle:
 				ball.launch_from_paddle()
-	#print consola 
-	if not _power_ball_timer.is_stopped():
-		print(_power_ball_timer.time_left)
+
+# TEST: Explosive Ball
+func explosive_ball() -> void:
+	var balls = get_tree().get_nodes_in_group("ball")
+	for ball in balls:
+		if ball.has_method("set_explosive_ball"):
+			ball.set_explosive_ball()
 
 # Called by the Powerup when “expand_paddle” is picked up
 func expand_paddle() -> void:
@@ -60,28 +69,33 @@ func reduce_paddle() -> void:
 
 	
 func power_ball() -> void:
-	# Activar el powerup
+	# Activar el powerup permanentemente
 	_power_ball_active = true
-	
 	# Indicarle a la bola que está en modo power_ball
 	var balls = get_tree().get_nodes_in_group("ball")
 	for ball in balls:
 		if ball.has_method("set_power_ball"):
 			ball.set_power_ball(true)
-	
-	# Iniciar el temporizador
-	if _power_ball_timer.is_stopped() == false:
-		_power_ball_timer.stop()
-	_power_ball_timer.start(10.0)  # 10 segundos de duración	
-	
-func _on_power_ball_timeout() -> void:
+
+# NORMAL BALL POWER-UP
+func normal_ball() -> void:
 	_power_ball_active = false
-	
 	# Desactivar el modo power_ball en todas las bolas
 	var balls = get_tree().get_nodes_in_group("ball")
 	for ball in balls:
 		if ball.has_method("set_power_ball"):
 			ball.set_power_ball(false)
+	
 
 func activate_magnet() -> void:
 	magnet_active = true
+
+func speed_ball() -> void:
+	var balls = get_tree().get_nodes_in_group("ball")
+	for ball in balls:
+		ball.SPEED *= 1.2 # Aumenta velocidad 20%
+
+func slow_ball() -> void:
+	var balls = get_tree().get_nodes_in_group("ball")
+	for ball in balls:
+		ball.SPEED *= 0.8 # Reduce velocidad 20%

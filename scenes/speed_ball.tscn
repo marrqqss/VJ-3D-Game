@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://baj6wcn8dbpcr"]
+
+[ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_3i8dt"]
+[ext_resource type="PackedScene" uid="uid://bovfhfkabs5d4" path="res://assets/powerups/speed_up.glb" id="2_3i8dt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
+size = Vector3(0.828206, 1.01711, 0.883621)
+
+[node name="powerUp" type="Area3D"]
+collision_layer = 8
+collision_mask = 22
+script = ExtResource("1_3i8dt")
+powerup_type = "speed_ball"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0227586, 0, -1.99987, 0, 2, 0, 1.99987, 0, 0.0227586, -0.00979554, 0.0121815, -0.0138668)
+shape = SubResource("BoxShape3D_uk6or")
+
+[node name="speed_up" parent="." instance=ExtResource("2_3i8dt")]

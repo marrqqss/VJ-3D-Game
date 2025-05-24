@@ -67,3 +67,19 @@ func apply_powerup(player: Node) -> void:
 			var balls = get_tree().get_nodes_in_group("ball")
 			for ball in balls:
 				ball.spawn_extra_balls()
+		"slow_ball":
+			var balls = get_tree().get_nodes_in_group("ball")
+			for ball in balls:
+				ball.SPEED *= 0.8  # Reduce speed by 20%
+		"speed_ball":
+			var balls = get_tree().get_nodes_in_group("ball")
+			for ball in balls:
+				ball.SPEED *= 1.2  # Increase speed by 20%
+		"normal_ball":
+			if player._power_ball_active:
+				player.normal_ball()
+		"explosive_ball":
+			var balls = get_tree().get_nodes_in_group("ball")
+			for ball in balls:
+				if ball.has_method("set_explosive_ball"):
+					ball.set_explosive_ball()

@@ -72,7 +72,20 @@ func _physics_process(delta: float) -> void:
 		var col = get_last_slide_collision()
 		if col:
 			var collider = col.get_collider()
-			
+
+			# --- EXPLOSIVE BALL LOGIC ---
+			if explosive_mode and collider.is_in_group("blocks"):
+				# Eliminar todos los bloques cercanos
+				var explosion_radius = 2.5
+				var blocks = get_tree().get_nodes_in_group("blocks")
+				for block in blocks:
+					if block.global_transform.origin.distance_to(col.get_position()) <= explosion_radius:
+						block.queue_free()
+				# Rebote normal después de explosión
+				direction = direction.bounce(col.get_normal()) * BOUNCE
+				direction = direction.normalized()
+				return
+
 			if power_ball_mode and collider.is_in_group("blocks"):
 				# Power Ball: no rebotar
 				pass
@@ -80,7 +93,6 @@ func _physics_process(delta: float) -> void:
 			elif collider.is_in_group("Player"):
 				if collider.magnet_active:
 					last_direction = direction
-					
 					var local_hit = collider.to_local(col.get_position())
 					collision_offset = Vector3(local_hit.x, 0, -1)
 					var previous_global = global_transform
@@ -104,6 +116,11 @@ func _physics_process(delta: float) -> void:
 				direction = direction.bounce(col.get_normal()) * BOUNCE
 				direction = direction.normalized()
 
+
+var explosive_mode: bool = false
+
+func set_explosive_ball() -> void:
+	explosive_mode = true
 
 func launch_from_paddle():
 	var parent = get_parent()

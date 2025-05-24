@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://t6wvfb51cemw" path="res://assets/powerups/mace.fbx" id="2_jtc8o"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qwg32"]
-height = 2.22446
-radius = 0.426758
+height = 1.82684
+radius = 0.399414
 
 [node name="powerUp" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573576, 0, 0.573576, 0.819152, 0, 0, 0)
@@ -15,8 +15,8 @@ script = ExtResource("1_jtc8o")
 powerup_type = "power_ball"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 1.17518, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 1.78814e-07, 0, -1.78814e-07, 1.2, 0, 1.01578, -1.49012e-07)
 shape = SubResource("CylinderShape3D_qwg32")
 
 [node name="mace" parent="." instance=ExtResource("2_jtc8o")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 2.5, 0, 0, 0, 3, 0, 0, 0)

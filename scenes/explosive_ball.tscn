@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca2s3l00xdl7s"]
+
+[ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_2lxnu"]
+[ext_resource type="PackedScene" uid="uid://bv452u7o1vpo3" path="res://assets/powerups/explosive_ball.glb" id="2_2lxnu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
+size = Vector3(0.99544, 0.513045, 1.03452)
+
+[node name="powerUp" type="Area3D"]
+collision_layer = 8
+collision_mask = 22
+script = ExtResource("1_2lxnu")
+powerup_type = "explosive_ball"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0227586, 0, -1.99987, 0, 2, 0, 1.99987, 0, 0.0227586, -0.00827246, 0.0172492, 0.0141934)
+shape = SubResource("BoxShape3D_uk6or")
+
+[node name="explosive_ball" parent="." instance=ExtResource("2_2lxnu")]

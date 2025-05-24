@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce0ogf18lhg2"]
+
+[ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_qinnb"]
+[ext_resource type="PackedScene" uid="uid://dj1yl4et3ijtd" path="res://assets/powerups/complete_level.glb" id="2_qinnb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
+size = Vector3(0.73701, 2.12484, 1.99951)
+
+[node name="powerUp" type="Area3D"]
+collision_layer = 8
+collision_mask = 22
+script = ExtResource("1_qinnb")
+powerup_type = "complete_level"
+
+[node name="complete_level" parent="." instance=ExtResource("2_qinnb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0113793, 0, -0.999935, 0, 1, 0, 0.999935, 0, 0.0113793, 0.00397102, 0.00504395, 0.0259246)
+shape = SubResource("BoxShape3D_uk6or")

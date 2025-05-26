@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://g1n0n2382xgk"]
+
+[ext_resource type="FontFile" uid="uid://dnyblktpgc2wk" path="res://assets/fonts/Super Dream.ttf" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://b2lmmumx0txm" path="res://scripts/hud.gd" id="1_oo0fn"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_oo0fn")
+
+[node name="Puntuation" type="Label" parent="."]
+offset_left = 22.0
+offset_top = 20.0
+offset_right = 292.0
+offset_bottom = 100.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_ahhtf")
+theme_override_font_sizes/font_size = 30
+text = "Puntuation:"
+
+[node name="Points" type="Label" parent="."]
+offset_left = 198.0
+offset_top = 20.0
+offset_right = 468.0
+offset_bottom = 100.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_ahhtf")
+theme_override_font_sizes/font_size = 30
+text = "X"

@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://brlitfkqjp8ov"]
+[gd_scene load_steps=28 format=3 uid="uid://brlitfkqjp8ov"]
 
 [ext_resource type="Shader" uid="uid://dq8ifb5bshpna" path="res://shaders/map3.gdshader" id="1_0yy7v"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_53xux"]
 [ext_resource type="Script" uid="uid://dntg20i58gg37" path="res://scripts/map_cinematic.gd" id="1_twb3g"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_4cdx2"]
+[ext_resource type="PackedScene" uid="uid://g1n0n2382xgk" path="res://scenes/hud.tscn" id="2_j05tm"]
 [ext_resource type="PackedScene" uid="uid://8bp1g3heak0a" path="res://map_blocks/stone_dark.tscn" id="3_mltpi"]
 [ext_resource type="PackedScene" uid="uid://bktc0onr5lusn" path="res://map_blocks/lava.tscn" id="4_68yje"]
 [ext_resource type="PackedScene" uid="uid://nopqacypb66o" path="res://map_blocks/bricks_gray.tscn" id="5_2pqj4"]
@@ -97,6 +98,8 @@ material = SubResource("StandardMaterial3D_xng1r")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_twb3g")
+
+[node name="HUD" parent="." instance=ExtResource("2_j05tm")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")

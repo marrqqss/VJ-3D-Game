@@ -1,5 +1,8 @@
 extends Node
 
+signal score_changed(new_score: int)
+var puntuation : int = 0
+
 var complete_level_spawned := false
 
 # Lista de mapas para progresión dinámica
@@ -12,6 +15,10 @@ var maps := [
 ]
 var current_map_index := 0
 
+func add_score(points: int) -> void:
+	puntuation += points
+	emit_signal("score_changed", puntuation)
+
 func reset_level_flags():
 	complete_level_spawned = false
 
@@ -22,6 +29,7 @@ func reset_progression():
 
 # Llama esto cuando el jugador recoge complete_level
 func advance_to_next_map() -> String:
+	puntuation = 0
 	current_map_index += 1
 	reset_level_flags()
 	if current_map_index < maps.size():

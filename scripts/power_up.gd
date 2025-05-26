@@ -84,20 +84,10 @@ func apply_powerup(player: Node) -> void:
 				if ball.has_method("set_explosive_ball"):
 					ball.set_explosive_ball()
 		"complete_level":
-			# Elimina bolas
-			for ball in get_tree().get_nodes_in_group("ball"):
-				if is_instance_valid(ball):
-					ball.queue_free()
-			# Elimina powerups
-			for pu in get_tree().get_nodes_in_group("powerups"):
-				if is_instance_valid(pu):
-					pu.queue_free()
-			# Elimina bloques
-			for block in get_tree().get_nodes_in_group("blocks"):
-				if is_instance_valid(block):
-					block.queue_free()
+			# Limpia todos los objetos del nivel usando la función centralizada
+			GameState.clean_level_objects()
+			
 			# Progresión dinámica: avanza al siguiente mapa
-			GameState.reset_level_flags()
 			var next_map = GameState.advance_to_next_map()
 			if next_map != "":
 				get_tree().call_deferred("change_scene_to_file", next_map)

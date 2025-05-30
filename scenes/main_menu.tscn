@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://17rv5fwoi0m"]
+[gd_scene load_steps=24 format=3 uid="uid://17rv5fwoi0m"]
 
 [ext_resource type="Shader" uid="uid://s2sfm41k3657" path="res://shaders/map1.gdshader" id="1_flqon"]
 [ext_resource type="Script" uid="uid://bga0820ohk1ib" path="res://scripts/camera_menu.gd" id="1_rcqid"]
@@ -59,6 +59,10 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="SystemFont" id="SystemFont_rcqid"]
+font_names = PackedStringArray("Franklin Gothic")
+font_italic = true
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_rcqid")
@@ -589,6 +593,131 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1ajci")
 theme_override_styles/normal = SubResource("StyleBoxFlat_flqon")
 text = "Exit
 "
+
+[node name="PuntuationsLabel" type="Label" parent="."]
+offset_left = 555.0
+offset_top = 468.0
+offset_right = 736.0
+offset_bottom = 497.0
+size_flags_horizontal = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Best puntuations"
+vertical_alignment = 2
+
+[node name="Puntuations" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = 141.0
+offset_right = 1.0
+offset_bottom = 302.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="map1" type="Label" parent="Puntuations"]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Map 1:"
+
+[node name="map2" type="Label" parent="Puntuations"]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Map 2:"
+
+[node name="map3" type="Label" parent="Puntuations"]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Map 3:"
+
+[node name="map4" type="Label" parent="Puntuations"]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Map 4:"
+
+[node name="map5" type="Label" parent="Puntuations"]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Map 5:"
+
+[node name="Puntuations2" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = 141.0
+offset_right = 82.0
+offset_bottom = 302.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="puntuation1" type="Label" parent="Puntuations2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="puntuation2" type="Label" parent="Puntuations2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="puntuation3" type="Label" parent="Puntuations2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="puntuation4" type="Label" parent="Puntuations2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="puntuation5" type="Label" parent="Puntuations2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "0"
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)

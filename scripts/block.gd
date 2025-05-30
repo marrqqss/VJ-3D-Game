@@ -37,6 +37,8 @@ func _on_body_entered(body: Node) -> void:
 	elif randf() < powerup_chance:
 		spawn_powerup(my_pos)
 
+	GameState.add_score(500)
+
 	queue_free()
 
 

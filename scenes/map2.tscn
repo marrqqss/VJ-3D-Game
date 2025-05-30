@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://djywy03ta7dga"]
+[gd_scene load_steps=20 format=3 uid="uid://djywy03ta7dga"]
 
 [ext_resource type="Shader" uid="uid://crpritlh1mm8l" path="res://shaders/map2.gdshader" id="1_ccs1r"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_hs16b"]
 [ext_resource type="Script" uid="uid://dntg20i58gg37" path="res://scripts/map_cinematic.gd" id="1_xbw1t"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_btxqx"]
+[ext_resource type="PackedScene" uid="uid://g1n0n2382xgk" path="res://scenes/hud.tscn" id="2_wxv3s"]
 [ext_resource type="PackedScene" uid="uid://cxlvlvn6opgey" path="res://map_blocks/sand.tscn" id="3_lk7cf"]
 [ext_resource type="PackedScene" uid="uid://b4li0e67kue6g" path="res://map_blocks/gold_stack.tscn" id="4_rtqf6"]
 [ext_resource type="PackedScene" uid="uid://bc4njct07owjw" path="res://map_blocks/bricks.tscn" id="5_u6ti8"]
@@ -47,6 +48,8 @@ viewport_path = NodePath("CameraPivot/Dust/SubViewport")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_xbw1t")
+
+[node name="HUD" parent="." instance=ExtResource("2_wxv3s")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")

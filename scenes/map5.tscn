@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://7jycrh73urcw"]
+[gd_scene load_steps=18 format=3 uid="uid://7jycrh73urcw"]
 
 [ext_resource type="Shader" uid="uid://degwhmxxbgbd" path="res://shaders/map5.gdshader" id="1_3l5go"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_bexgc"]
 [ext_resource type="Script" uid="uid://dntg20i58gg37" path="res://scripts/map_cinematic.gd" id="1_noo1g"]
+[ext_resource type="PackedScene" uid="uid://g1n0n2382xgk" path="res://scenes/hud.tscn" id="2_feugh"]
 [ext_resource type="PackedScene" uid="uid://d0ekue5jle6kp" path="res://scenes/ball.tscn" id="2_noo1g"]
 [ext_resource type="PackedScene" uid="uid://cpaaekstj020r" path="res://map_blocks/water.tscn" id="3_3rl6u"]
 [ext_resource type="PackedScene" uid="uid://qhg5x73fac0d" path="res://map_blocks/wood.tscn" id="4_e0umb"]
@@ -15,7 +16,7 @@ shader = ExtResource("1_3l5go")
 shader_parameter/base_color = Color(0.0155352, 0.055914, 0.121854, 1)
 shader_parameter/cloud_speed = 0.1
 shader_parameter/cloud_scale = 2.0
-shader_parameter/cloud_contrast = 8.0
+shader_parameter/cloud_contrast = 3.0
 
 [sub_resource type="Sky" id="Sky_ig7tw"]
 sky_material = SubResource("ShaderMaterial_ip23h")
@@ -28,8 +29,8 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3l5go"]
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.0181949, 0.228131, 0.542668, 1)
-metallic_specular = 0.95
+albedo_color = Color(0.0741225, 0.329512, 0.515875, 1)
+metallic_specular = 0.0
 roughness = 0.24
 normal_scale = 5.0
 refraction_enabled = true
@@ -55,12 +56,15 @@ height = 0.5
 [node name="Main" type="Node3D"]
 script = ExtResource("1_noo1g")
 
+[node name="HUD" parent="." instance=ExtResource("2_feugh")]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 31, 0)
 light_color = Color(0.154876, 0.154876, 0.154876, 1)
+light_energy = 5.5
 shadow_enabled = true
 
 [node name="Foundation" type="CSGCombiner3D" parent="."]
@@ -328,40 +332,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
 
 [node name="Wood" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 2, 2, 0)
 
 [node name="Wood2" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 2, -2)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 2, 2, -2)
 
 [node name="Wood3" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 2, -4)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 2, 2, -4)
 
 [node name="Wood5" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -6)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 2, -6)
 
 [node name="Wood7" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 2, -4)
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, -2, 2, -4)
 
 [node name="Wood15" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 2, -2)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, -2, 2, -2)
 
 [node name="Wood9" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, -2, 2, 0)
 
 [node name="Wood10" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 2, 0)
 
 [node name="Wood13" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 2)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 2, 2)
 
 [node name="Wood14" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4, 2)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 4, 2)
 
 [node name="Wood11" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -2)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 2, -2)
 
 [node name="Wood16" parent="LevelBlocks" instance=ExtResource("4_e0umb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -4)
+transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 2, -4)
 
 [node name="Candle_pack" parent="LevelBlocks" instance=ExtResource("6_3l5go")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 2)

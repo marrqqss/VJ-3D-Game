@@ -10,6 +10,7 @@ func _process(delta: float) -> void:
 	$"../Puntuations2/puntuation5".text = str(GameState.map5_puntuation)
 
 func _on_start_game_pressed() -> void:
+	GameState.current_map_index = 0
 	get_tree().change_scene_to_packed(map1)
 	pass
 

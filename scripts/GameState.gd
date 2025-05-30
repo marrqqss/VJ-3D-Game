@@ -11,15 +11,23 @@ var map5_puntuation : int = 0
 # Procesa input global para cambio de mapas con teclas 1-5
 func _process(_delta):
 	if Input.is_action_just_pressed("change_map1"):
+		save_state()
 		load_and_change_map(0)
 	if Input.is_action_just_pressed("change_map2"):
+		save_state()
 		load_and_change_map(1)
 	if Input.is_action_just_pressed("change_map3"):
+		save_state()
 		load_and_change_map(2)
 	if Input.is_action_just_pressed("change_map4"):
+		save_state()
 		load_and_change_map(3)
 	if Input.is_action_just_pressed("change_map5"):
+		save_state()
 		load_and_change_map(4)
+	if Input.is_action_just_pressed("go_to_title_screen"):
+		save_state()
+		load_and_change_map(5)
 
 # Limpia todos los objetos del nivel (bolas, powerups, bloques)
 func clean_level_objects() -> void:
@@ -38,7 +46,7 @@ func clean_level_objects() -> void:
 func load_and_change_map(index: int) -> void:
 	# Limpia la escena actual
 	clean_level_objects()
-	
+	current_map_index = index
 	# Carga el mapa seleccionado
 	var map_path = load_map_by_index(index)
 	if map_path != "":
@@ -52,7 +60,8 @@ var maps := [
 	"res://scenes/map2.tscn",
 	"res://scenes/map3.tscn",
 	"res://scenes/map4.tscn",
-	"res://scenes/map5.tscn"
+	"res://scenes/map5.tscn",
+	"res://scenes/main_menu.tscn"
 ]
 var current_map_index := 0
 
@@ -70,6 +79,14 @@ func reset_progression():
 
 # Llama esto cuando el jugador recoge complete_level
 func advance_to_next_map() -> String:
+	save_state()
+	current_map_index += 1
+	reset_level_flags()
+	if current_map_index < maps.size():
+		return maps[current_map_index]
+	return ""
+
+func save_state() -> void:
 	if current_map_index == 0 && puntuation > map1_puntuation:
 		map1_puntuation = puntuation
 		print(map1_puntuation)
@@ -86,11 +103,6 @@ func advance_to_next_map() -> String:
 		map5_puntuation = puntuation
 		print(map5_puntuation)
 	puntuation = 0
-	current_map_index += 1
-	reset_level_flags()
-	if current_map_index < maps.size():
-		return maps[current_map_index]
-	return ""
 
 # Devuelve el mapa actual
 func get_current_map() -> String:

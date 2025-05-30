@@ -8,6 +8,11 @@ var map3_puntuation : int = 0
 var map4_puntuation : int = 0
 var map5_puntuation : int = 0
 
+var save_file_path := "res://user_data.json"
+
+func _ready():
+	load_saved_scores()
+
 # Procesa input global para cambio de mapas con teclas 1-5
 func _process(_delta):
 	if Input.is_action_just_pressed("change_map1"):
@@ -31,7 +36,6 @@ func _process(_delta):
 
 # Limpia todos los objetos del nivel (bolas, powerups, bloques)
 func clean_level_objects() -> void:
-	# Limpia la escena actual
 	for ball in get_tree().get_nodes_in_group("ball"):
 		if is_instance_valid(ball):
 			ball.queue_free()
@@ -42,19 +46,14 @@ func clean_level_objects() -> void:
 		if is_instance_valid(block):
 			block.queue_free()
 
-# Cambia al mapa especificado y limpia la escena actual
 func load_and_change_map(index: int) -> void:
-	# Limpia la escena actual
 	clean_level_objects()
 	current_map_index = index
-	# Carga el mapa seleccionado
 	var map_path = load_map_by_index(index)
 	if map_path != "":
 		get_tree().call_deferred("change_scene_to_file", map_path)
 
 var complete_level_spawned := false
-
-# Lista de mapas para progresión dinámica
 var maps := [
 	"res://scenes/map1.tscn",
 	"res://scenes/map2.tscn",
@@ -72,12 +71,10 @@ func add_score(points: int) -> void:
 func reset_level_flags():
 	complete_level_spawned = false
 
-# Llama esto al iniciar partida o volver al menú
 func reset_progression():
 	current_map_index = 0
 	reset_level_flags()
 
-# Llama esto cuando el jugador recoge complete_level
 func advance_to_next_map() -> String:
 	save_state()
 	current_map_index += 1
@@ -89,26 +86,46 @@ func advance_to_next_map() -> String:
 func save_state() -> void:
 	if current_map_index == 0 && puntuation > map1_puntuation:
 		map1_puntuation = puntuation
-		print(map1_puntuation)
 	if current_map_index == 1 && puntuation > map2_puntuation:
 		map2_puntuation = puntuation
-		print(map2_puntuation)
 	if current_map_index == 2 && puntuation > map3_puntuation:
 		map3_puntuation = puntuation
-		print(map3_puntuation)
 	if current_map_index == 3 && puntuation > map4_puntuation:
 		map4_puntuation = puntuation
-		print(map4_puntuation)
 	if current_map_index == 4 && puntuation > map5_puntuation:
 		map5_puntuation = puntuation
-		print(map5_puntuation)
 	puntuation = 0
+	save_scores_to_file()
 
-# Devuelve el mapa actual
+func save_scores_to_file():
+	var data = {
+		"map1": map1_puntuation,
+		"map2": map2_puntuation,
+		"map3": map3_puntuation,
+		"map4": map4_puntuation,
+		"map5": map5_puntuation
+	}
+	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(data))
+		file.close()
+
+func load_saved_scores():
+	if FileAccess.file_exists(save_file_path):
+		var file = FileAccess.open(save_file_path, FileAccess.READ)
+		if file:
+			var data = JSON.parse_string(file.get_as_text())
+			if typeof(data) == TYPE_DICTIONARY:
+				map1_puntuation = data.get("map1", 0)
+				map2_puntuation = data.get("map2", 0)
+				map3_puntuation = data.get("map3", 0)
+				map4_puntuation = data.get("map4", 0)
+				map5_puntuation = data.get("map5", 0)
+			file.close()
+
 func get_current_map() -> String:
 	return maps[current_map_index]
 
-# Carga un mapa específico por índice (0-4 para map1-map5)
 func load_map_by_index(index: int) -> String:
 	if index >= 0 and index < maps.size():
 		current_map_index = index

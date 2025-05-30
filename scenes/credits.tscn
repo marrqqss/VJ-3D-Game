@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw0l4cskeumts"]
+
+[ext_resource type="FontFile" uid="uid://dnyblktpgc2wk" path="res://assets/fonts/Super Dream.ttf" id="12_8t73l"]
+
+[sub_resource type="SystemFont" id="SystemFont_rcqid"]
+font_names = PackedStringArray("Franklin Gothic")
+font_italic = true
+
+[node name="Main" type="Node3D"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1280.0
+offset_bottom = 1280.0
+
+[node name="Label7" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -111.0
+offset_right = 90.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Press ESC to go back to the title screen"
+vertical_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -113.0
+offset_right = 227.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("12_8t73l")
+theme_override_font_sizes/font_size = 80
+text = "Arkanoid 3D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "A game made by"
+vertical_alignment = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "David Comino Muriano"
+vertical_alignment = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "Marc Ribas Acon"
+vertical_alignment = 2
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "at FIB UPC"
+vertical_alignment = 2
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("SystemFont_rcqid")
+theme_override_font_sizes/font_size = 25
+text = "using Godot Engine"
+vertical_alignment = 2

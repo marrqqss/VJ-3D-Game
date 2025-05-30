@@ -8,7 +8,7 @@ var map3_puntuation : int = 0
 var map4_puntuation : int = 0
 var map5_puntuation : int = 0
 
-var save_file_path := "res://user_data.json"
+var save_file_path := "user://arkanoid3D_save_game.json"
 
 func _ready():
 	load_saved_scores()
@@ -32,7 +32,7 @@ func _process(_delta):
 		load_and_change_map(4)
 	if Input.is_action_just_pressed("go_to_title_screen"):
 		save_state()
-		load_and_change_map(5)
+		load_and_change_map(6)
 
 # Limpia todos los objetos del nivel (bolas, powerups, bloques)
 func clean_level_objects() -> void:
@@ -60,6 +60,7 @@ var maps := [
 	"res://scenes/map3.tscn",
 	"res://scenes/map4.tscn",
 	"res://scenes/map5.tscn",
+	"res://scenes/credits.tscn",
 	"res://scenes/main_menu.tscn"
 ]
 var current_map_index := 0
@@ -80,6 +81,8 @@ func advance_to_next_map() -> String:
 	current_map_index += 1
 	reset_level_flags()
 	if current_map_index < maps.size():
+		print(current_map_index)
+		print(maps.size())
 		return maps[current_map_index]
 	return ""
 

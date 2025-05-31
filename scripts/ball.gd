@@ -28,6 +28,9 @@ func set_power_ball(active: bool) -> void:
 	power_ball_mode = active
 	
 
+# Límite Z más allá del cual la bola se destruirá
+@export var out_of_bounds_z: float = 17.0
+
 func _physics_process(delta: float) -> void:
 	if is_attached_to_paddle:
 		# Mantener posición y contrarrestar la escala del paddle
@@ -69,6 +72,9 @@ func _physics_process(delta: float) -> void:
 			mesh_instance.look_at(global_position + velocity, Vector3.UP)
 			current_rotation -= velocity.length() * delta * ROTATION_SPEED
 			mesh_instance.rotate_object_local(Vector3(1, 0, 0), current_rotation - mesh_instance.rotation.x)
+		
+		# Verificar si la bola está fuera de los límites
+		check_out_of_bounds()
 
 		var col = get_last_slide_collision()
 		if col:
@@ -150,6 +156,49 @@ func _finish_launch(previous_global: Transform3D, launch_dir: Vector3):
 	velocity = direction * SPEED
 	is_attached_to_paddle = false
 	launched = true
+	
+# Función para verificar si la bola está fuera de los límites
+func check_out_of_bounds() -> void:
+	# Verificar si la bola ha ido más allá del límite Z
+	if global_transform.origin.z > out_of_bounds_z:
+		# Si es la última bola, perder una vida y respawnear en el jugador
+		var balls = get_tree().get_nodes_in_group("ball")
+		if balls.size() <= 1:
+			# Reducir una vida
+			var has_lives_left = GameState.lose_life()
+			
+			# Si aún quedan vidas, respawnear la bola
+			if has_lives_left:
+				# Buscar al jugador
+				var players = get_tree().get_nodes_in_group("Player")
+				if players.size() > 0:
+					# Resetear la bola en lugar de destruirla
+					var player = players[0]
+					
+					# Reparentear la bola al jugador
+					var current_parent = get_parent()
+					if current_parent != player:
+						current_parent.remove_child(self)
+						player.add_child(self)
+					
+					# Resetear estado
+					launched = false
+					velocity = Vector3.ZERO
+					is_attached_to_paddle = false
+					power_ball_mode = false
+					explosive_mode = false
+					
+					# Posicionar correctamente
+					global_transform.origin = player.global_transform.origin + attach_offset
+				else:
+					# No hay jugador, destruir la bola
+					queue_free()
+			else:
+				# No quedan vidas, la bola se destruye (GameState ya se encarga de ir al menú)
+				queue_free()
+		else:
+			# Hay más bolas, simplemente destruir esta
+			queue_free()
 	
 	
 func spawn_extra_balls():

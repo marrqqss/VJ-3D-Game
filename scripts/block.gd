@@ -12,6 +12,9 @@ func _ready() -> void:
 	gravity_scale = 1
 	detector.body_entered.connect(Callable(self, "_on_body_entered"))
 	
+	# Reiniciar la variable de avance de nivel
+	_level_advancing = false
+	
 	# Esperar un frame para asegurarnos de que todos los bloques se han añadido a la escena
 	await get_tree().process_frame
 	
@@ -22,8 +25,11 @@ func _ready() -> void:
 		print("[DEBUG] Inicializando _initial_block_count:", _initial_block_count)
 	
 
+# Variable estática para evitar que múltiples bloques activen el avance de nivel
+static var _level_advancing := false
+
 func _on_body_entered(body: Node) -> void:
-	if not body.is_in_group("ball"):
+	if not body.is_in_group("ball") or _level_advancing:
 		return
 
 	print("ball")
@@ -35,7 +41,7 @@ func _on_body_entered(body: Node) -> void:
 	
 	# Asegurarse de que _initial_block_count es válido
 	if _initial_block_count <= 0:
-		_initial_block_count = blocks.size() # Usar el tamaño actual como fallback
+		_initial_block_count = blocks.size()
 	
 	var destroyed_percent = 1.0 - float(blocks.size()) / float(_initial_block_count)
 	print("[DEBUG] destroyed_percent:", destroyed_percent, "blocks.size():", blocks.size(), "_initial_block_count:", _initial_block_count)
@@ -52,16 +58,16 @@ func _on_body_entered(body: Node) -> void:
 	# Verificar si este era el último bloque ANTES de destruirlo
 	if blocks_remaining <= 0:
 		print("[DEBUG] ¡Último bloque destruido! Avanzando al siguiente nivel...")
-		# Primero nos removemos del grupo para evitar que otros bloques piensen que son el último
+		# Marcar que el nivel ya está avanzando para evitar que otros bloques lo activen
+		_level_advancing = true
+		# Remover del grupo y destruir
 		remove_from_group("blocks")
-		# Luego destruimos el bloque
 		queue_free()
-		# Finalmente avanzamos al siguiente nivel
+		# Limpiar objetos y avanzar nivel
 		GameState.clean_level_objects()
 		var next_map = GameState.advance_to_next_map()
 		get_tree().call_deferred("change_scene_to_file", next_map)
 	else:
-		# Si no es el último bloque, simplemente lo destruimos
 		queue_free()
 
 

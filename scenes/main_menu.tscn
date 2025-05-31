@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://17rv5fwoi0m"]
+[gd_scene load_steps=25 format=3 uid="uid://17rv5fwoi0m"]
 
 [ext_resource type="Shader" uid="uid://s2sfm41k3657" path="res://shaders/map1.gdshader" id="1_flqon"]
 [ext_resource type="Script" uid="uid://bga0820ohk1ib" path="res://scripts/camera_menu.gd" id="1_rcqid"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://blwgg263gks5y" path="res://map_blocks/hunter.tscn" id="11_svtp6"]
 [ext_resource type="PackedScene" uid="uid://b7giovyuulp2q" path="res://map_blocks/lumberjack.tscn" id="12_1dfpl"]
 [ext_resource type="FontFile" uid="uid://dnyblktpgc2wk" path="res://assets/fonts/Super Dream.ttf" id="12_rcqid"]
+[ext_resource type="AudioStream" uid="uid://bck6skqbkpm03" path="res://music/[OST] Captain Toad： Treasure Tracker - Main Theme - NintendoViewer.mp3" id="14_1ajci"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k348l"]
 shader = ExtResource("1_flqon")
@@ -725,6 +726,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.939692, 0.342021, 0, -0.342021, 0.939692, -0.4, 13.9, 26.9)
 fov = 31.7
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.90735e-06)
+stream = ExtResource("14_1ajci")
+attenuation_model = 3
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Start Game" to="VBoxContainer" method="_on_start_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="VBoxContainer" method="_on_exit_pressed"]

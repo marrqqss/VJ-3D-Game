@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 @onready var detector := $HitDetector
-@export var powerup_chance: float = 0.2 # 20% de probabilidad de spawneo
+@export var powerup_chance: float = 0.1 # 10% de probabilidad de spawneo
 
 var _initial_block_count := -1
 
@@ -22,12 +22,14 @@ func _on_body_entered(body: Node) -> void:
 	print("ball")
 	var my_pos: Vector3 = global_transform.origin
 
+	# Obtener el recuento de bloques antes de destruir este
 	var blocks = get_tree().get_nodes_in_group("blocks")
+	var blocks_remaining = blocks.size() - 1
 	var destroyed_percent = 1.0 - float(blocks.size()) / float(_initial_block_count)
 	print("[DEBUG] destroyed_percent:", destroyed_percent, "blocks.size():", blocks.size(), "_initial_block_count:", _initial_block_count)
 
 	# Si toca el especial, ignora la probabilidad
-	if destroyed_percent >= 0.95 and not GameState.complete_level_spawned:
+	if destroyed_percent >= 0.90 and not GameState.complete_level_spawned:
 		if _initial_block_count > 0:
 			print("[DEBUG] Spawneando complete_level")
 			GameState.complete_level_spawned = true
@@ -38,8 +40,17 @@ func _on_body_entered(body: Node) -> void:
 		spawn_powerup(my_pos)
 
 	GameState.add_score(500)
-
+	
+	# Destruir el bloque
 	queue_free()
+	
+	# Verificar si este era el último bloque
+	if blocks_remaining == 0:
+		print("[DEBUG] ¡Último bloque destruido! Avanzando al siguiente nivel...")
+		GameState.clean_level_objects()
+		var next_map = GameState.advance_to_next_map()
+		get_tree().call_deferred("change_scene_to_file", next_map)
+
 
 
 func spawn_powerup(pos: Vector3, force_complete_level: bool = false) -> void:

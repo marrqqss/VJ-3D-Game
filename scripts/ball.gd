@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var attach_offset: Vector3 = Vector3(0, 0, -1)
 @export var ROTATION_SPEED: float = 0.4  
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
 
 var launched: bool = false
 var direction: Vector3 = Vector3(0, 0, 1)
@@ -74,6 +76,8 @@ func _physics_process(delta: float) -> void:
 
 			# --- EXPLOSIVE BALL LOGIC ---
 			if explosive_mode and collider.is_in_group("blocks"):
+				audio_stream_player_2.play()
+				audio_stream_player.play()
 				# Eliminar todos los bloques cercanos
 				var explosion_radius = 2.5
 				var blocks = get_tree().get_nodes_in_group("blocks")
@@ -101,6 +105,7 @@ func _physics_process(delta: float) -> void:
 					is_attached_to_paddle = true
 					velocity = Vector3.ZERO
 				else:
+					audio_stream_player_2.play()
 					# Rebote NORMAL con paleta
 					var local_hit = col.get_position() - collider.global_transform.origin
 					var pad_shape = collider.get_node("CollisionShape3D").shape
@@ -111,6 +116,7 @@ func _physics_process(delta: float) -> void:
 					direction = direction.normalized()
 			
 			else:
+				audio_stream_player_2.play()
 				# Rebote con otros objetos (paredes, etc)
 				direction = direction.bounce(col.get_normal()) * BOUNCE
 				direction = direction.normalized()

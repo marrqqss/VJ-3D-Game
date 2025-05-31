@@ -1,10 +1,114 @@
-[gd_scene load_steps=4 format=3 uid="uid://baj6wcn8dbpcr"]
+[gd_scene load_steps=9 format=3 uid="uid://baj6wcn8dbpcr"]
 
 [ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_3i8dt"]
 [ext_resource type="PackedScene" uid="uid://bovfhfkabs5d4" path="res://assets/powerups/speed_up.glb" id="2_3i8dt"]
+[ext_resource type="AudioStream" uid="uid://c6l3xth8c3st8" path="res://sfx/698768__ienba__game-pickup(1).wav" id="3_w475r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
 size = Vector3(0.828206, 1.01711, 0.883621)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_w475r"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("3_w475r")
+
+[sub_resource type="Animation" id="Animation_w475r"]
+resource_name = "pickup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("speed_up:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.833333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_j2jog"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("speed_up:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tgeh5"]
+_data = {
+&"RESET": SubResource("Animation_j2jog"),
+&"pickup": SubResource("Animation_w475r")
+}
 
 [node name="powerUp" type="Area3D"]
 collision_layer = 8
@@ -17,3 +121,12 @@ transform = Transform3D(0.0227586, 0, -1.99987, 0, 2, 0, 1.99987, 0, 0.0227586, 
 shape = SubResource("BoxShape3D_uk6or")
 
 [node name="speed_up" parent="." instance=ExtResource("2_3i8dt")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_w475r")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tgeh5")
+}

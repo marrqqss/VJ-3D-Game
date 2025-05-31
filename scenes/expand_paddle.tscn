@@ -1,10 +1,115 @@
-[gd_scene load_steps=4 format=3 uid="uid://bse80xgopkujb"]
+[gd_scene load_steps=9 format=3 uid="uid://bse80xgopkujb"]
 
 [ext_resource type="Script" uid="uid://o8vgsjlgsiow" path="res://scripts/power_up.gd" id="1_hy5bx"]
 [ext_resource type="PackedScene" uid="uid://c3vlqn3jafgqx" path="res://assets/powerups/expand_arrows.glb" id="2_hy5bx"]
+[ext_resource type="AudioStream" uid="uid://c6l3xth8c3st8" path="res://sfx/698768__ienba__game-pickup(1).wav" id="3_3un6s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uk6or"]
 size = Vector3(0.414837, 0.702232, 1.99951)
+
+[sub_resource type="Animation" id="Animation_mbnpo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("expand_arrows:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3un6s"]
+resource_name = "pickup"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("expand_arrows:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mbnpo"]
+_data = {
+&"RESET": SubResource("Animation_mbnpo"),
+&"pickup": SubResource("Animation_3un6s")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3un6s"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("3_3un6s")
 
 [node name="powerUp" type="Area3D"]
 collision_layer = 8
@@ -16,3 +121,12 @@ transform = Transform3D(0.0113793, 0, -0.999935, 0, 1, 0, 0.999935, 0, 0.0113793
 shape = SubResource("BoxShape3D_uk6or")
 
 [node name="expand_arrows" parent="." instance=ExtResource("2_hy5bx")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mbnpo")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_3un6s")
+bus = &"SFX"

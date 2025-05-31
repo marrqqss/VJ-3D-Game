@@ -3,6 +3,8 @@ extends Area3D
 @export var fall_speed: float = 5.0
 @export var rotation_speed: float = 2.0
 @export var powerup_type: String = "expand_paddle"
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 # Variables para el efecto de rebote
 @export var initial_bounce_height: float = 10.0
@@ -45,13 +47,15 @@ func _process(delta: float) -> void:
 	global_transform.origin.z += fall_speed * delta
 	
 	# Eliminar si cae fuera del área
-	if global_transform.origin.z > 17.0:
+	if global_transform.origin.z > 25.0:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		apply_powerup(body)
-		queue_free()
+		print("PICKUP")
+		animation_player.play("pickup")
+		
 
 func apply_powerup(player: Node) -> void:
 	match powerup_type:

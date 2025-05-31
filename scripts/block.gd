@@ -1,6 +1,8 @@
 extends RigidBody3D
 
 @onready var detector := $HitDetector
+@export var powerup_chance: float = 0.2 # 20% de probabilidad de spawneo
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var powerup_chance: float = 0.1 # 10% de probabilidad de spawneo
 
 # Variable estática compartida por todos los bloques
@@ -68,8 +70,7 @@ func _on_body_entered(body: Node) -> void:
 		var next_map = GameState.advance_to_next_map()
 		get_tree().call_deferred("change_scene_to_file", next_map)
 	else:
-		queue_free()
-
+    animation_player.play("destroy")
 
 
 func spawn_powerup(pos: Vector3, force_complete_level: bool = false) -> void:

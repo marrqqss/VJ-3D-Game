@@ -65,120 +65,90 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -17.2)
 
 [node name="Block" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2)
-powerup_chance = null
 
 [node name="Block8" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, -2)
-powerup_chance = null
 
 [node name="Block9" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, -2)
-powerup_chance = null
 
 [node name="Block26" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.5, -2)
-powerup_chance = null
 
 [node name="Block27" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, -2)
-powerup_chance = null
 
 [node name="Block30" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5.5, -2)
-powerup_chance = null
 
 [node name="Block28" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 3.5, -2)
-powerup_chance = null
 
 [node name="Block29" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, -2)
-powerup_chance = null
 
 [node name="Block10" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, -2)
-powerup_chance = null
 
 [node name="Block11" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.5, -2)
-powerup_chance = null
 
 [node name="Block12" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, -2)
-powerup_chance = null
 
 [node name="Block13" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -2)
-powerup_chance = null
 
 [node name="Block19" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 0)
-powerup_chance = null
 
 [node name="Block20" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 2)
-powerup_chance = null
 
 [node name="Block21" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 4)
-powerup_chance = null
 
 [node name="Block22" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 6)
-powerup_chance = null
 
 [node name="Block23" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 8)
-powerup_chance = null
 
 [node name="Block24" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 10)
-powerup_chance = null
 
 [node name="Block25" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 12)
-powerup_chance = null
 
 [node name="Block14" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -4)
-powerup_chance = null
 
 [node name="Block15" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -6)
-powerup_chance = null
 
 [node name="Block16" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -8)
-powerup_chance = null
 
 [node name="Block17" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -10)
-powerup_chance = null
 
 [node name="Block18" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, -12)
-powerup_chance = null
 
 [node name="Block2" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, -2)
-powerup_chance = null
 
 [node name="Block3" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, -2)
-powerup_chance = null
 
 [node name="Block4" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5, -2)
-powerup_chance = null
 
 [node name="Block5" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.5, -2)
-powerup_chance = null
 
 [node name="Block6" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, -2)
-powerup_chance = null
 
 [node name="Block7" parent="." instance=ExtResource("3_bdpbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, -2)
-powerup_chance = null

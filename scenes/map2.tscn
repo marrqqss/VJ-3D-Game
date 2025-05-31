@@ -731,3 +731,4 @@ size = Vector2i(5000, 5000)
 stream = ExtResource("14_1mo1p")
 attenuation_model = 3
 autoplay = true
+bus = &"Music"

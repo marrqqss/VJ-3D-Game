@@ -556,3 +556,4 @@ fov = 31.7
 stream = ExtResource("14_ccslo")
 attenuation_model = 3
 autoplay = true
+bus = &"Music"

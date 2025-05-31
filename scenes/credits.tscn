@@ -114,3 +114,4 @@ vertical_alignment = 2
 position = Vector2(642, 368)
 stream = ExtResource("2_2ckv8")
 autoplay = true
+bus = &"Music"

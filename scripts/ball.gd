@@ -24,8 +24,25 @@ func _ready() -> void:
 	velocity = Vector3.ZERO
 
 func set_power_ball(active: bool) -> void:
+	power_ball_mode = false
+	explosive_mode = false
+	
 	power_ball_mode = active
 	
+
+# Límite Z más allá del cual la bola se destruirá
+@export var out_of_bounds_z: float = 17.0
+
+# Límite Z para el rebote en God Mode
+@export var god_mode_bounce_z: float = 16.0
+
+# Límites X para el rebote en God Mode (límites laterales)
+@export var god_mode_bounce_x_min: float = -17.0
+@export var god_mode_bounce_x_max: float = 17.0
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_G:
+		GameState.toggle_god_mode()
 
 func _physics_process(delta: float) -> void:
 	if is_attached_to_paddle:
@@ -39,6 +56,10 @@ func _physics_process(delta: float) -> void:
 		#lock to player
 		var paddle_transform = get_parent().global_transform
 		global_transform.origin = paddle_transform.origin + attach_offset
+		
+		# Contrarrestar la escala del paddle para mantener el tamaño original de la bola
+		var parent = get_parent()
+		scale = Vector3(1.0 / parent.scale.x, 1.0, 1.0)
 
 		if Input.is_action_just_pressed("ui_accept"):
 			# — launch ball —
@@ -68,6 +89,9 @@ func _physics_process(delta: float) -> void:
 			mesh_instance.look_at(global_position + velocity, Vector3.UP)
 			current_rotation -= velocity.length() * delta * ROTATION_SPEED
 			mesh_instance.rotate_object_local(Vector3(1, 0, 0), current_rotation - mesh_instance.rotation.x)
+		
+		# Verificar si la bola está fuera de los límites
+		check_out_of_bounds()
 
 		var col = get_last_slide_collision()
 		if col:
@@ -79,11 +103,12 @@ func _physics_process(delta: float) -> void:
 				audio_stream_player_2.play()
 				audio_stream_player.play()
 				# Eliminar todos los bloques cercanos
-				var explosion_radius = 2.5
+				var explosion_radius = 3.5
 				var blocks = get_tree().get_nodes_in_group("blocks")
 				for block in blocks:
 					if block.global_transform.origin.distance_to(col.get_position()) <= explosion_radius:
-						block.queue_free()
+						if block != collider:
+							block._on_body_entered(self)
 				# Rebote normal después de explosión
 				direction = direction.bounce(col.get_normal()) * BOUNCE
 				direction = direction.normalized()
@@ -125,6 +150,11 @@ func _physics_process(delta: float) -> void:
 var explosive_mode: bool = false
 
 func set_explosive_ball() -> void:
+	# Reset all power-up modes first
+	power_ball_mode = false
+	explosive_mode = false
+	
+	# Then activate the requested mode
 	explosive_mode = true
 
 func launch_from_paddle():
@@ -148,6 +178,67 @@ func _finish_launch(previous_global: Transform3D, launch_dir: Vector3):
 	is_attached_to_paddle = false
 	launched = true
 	
+# Función para verificar si la bola está fuera de los límites
+func check_out_of_bounds() -> void:
+	if GameState.is_god_mode_active():
+		var position_changed = false
+		
+		if global_transform.origin.z > god_mode_bounce_z:
+			direction.z = -abs(direction.z) * 1.2
+			global_transform.origin.z = god_mode_bounce_z - 0.5
+			position_changed = true
+		
+		if global_transform.origin.x < god_mode_bounce_x_min:
+			direction.x = abs(direction.x) * 1.1
+			global_transform.origin.x = god_mode_bounce_x_min + 0.5
+			position_changed = true
+		
+		if global_transform.origin.x > god_mode_bounce_x_max:
+			direction.x = -abs(direction.x) * 1.1
+			global_transform.origin.x = god_mode_bounce_x_max - 0.5
+			position_changed = true
+		
+		
+		if position_changed:
+			direction = direction.normalized()
+			velocity = direction * SPEED
+			return
+	
+	# Verificar si la bola ha ido más allá del límite Z (para destrucción/respawn)
+	if global_transform.origin.z > out_of_bounds_z:
+		# Si es la última bola, perder una vida y respawnear en el jugador
+		var balls = get_tree().get_nodes_in_group("ball")
+		if balls.size() <= 1:
+			var has_lives_left = GameState.lose_life()
+			
+			# Si aún quedan vidas, respawnear la bola
+			if has_lives_left:
+				
+				var players = get_tree().get_nodes_in_group("Player")
+				if players.size() > 0:
+					var player = players[0]
+					
+					var current_parent = get_parent()
+					if current_parent != player:
+						current_parent.remove_child(self)
+						player.add_child(self)
+					
+					launched = false
+					velocity = Vector3.ZERO
+					is_attached_to_paddle = false
+					power_ball_mode = false
+					explosive_mode = false
+					
+					global_transform.origin = player.global_transform.origin + attach_offset
+					
+					scale = Vector3(1.0 / player.scale.x, 1.0, 1.0)
+				else:
+					queue_free()
+			else:
+				queue_free()
+		else:
+			queue_free()
+	
 	
 func spawn_extra_balls():
 	var angles = [30, -30]
@@ -157,13 +248,31 @@ func spawn_extra_balls():
 		var new_ball = ball_scene.instantiate()
 		new_ball.add_to_group("ball")
 		
-		# Heredar configuraciones de colisión
-		new_ball.collision_layer = collision_layer  # Capa 'balls' (1)
-		new_ball.collision_mask = collision_mask    # Máscara original (blocks + player)
+		
+		new_ball.collision_layer = collision_layer
+		new_ball.collision_mask = collision_mask    
+		
 		
 		new_ball.global_transform = global_transform
-		new_ball.direction = -direction.rotated(Vector3.UP, deg_to_rad(angle))
+		
+		
 		new_ball.launched = true
-		new_ball.velocity = new_ball.direction * SPEED
+		
+		
+		if power_ball_mode:
+			new_ball.set_power_ball(true)
+		if explosive_mode:
+			new_ball.set_explosive_ball()
+		
+		
+		new_ball.direction = -direction.rotated(Vector3.UP, deg_to_rad(angle))
+		
+		
+		var current_speed = velocity.length()
+		new_ball.SPEED = current_speed  
+		new_ball.velocity = new_ball.direction * current_speed
+		
+		
+		new_ball.current_rotation = current_rotation
 		
 		get_tree().root.add_child(new_ball)

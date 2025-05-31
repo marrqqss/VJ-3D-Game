@@ -1,12 +1,22 @@
 extends Node
 
 signal score_changed(new_score: int)
+signal lives_changed(new_lives: int)
+signal god_mode_changed(is_active: bool)
+
 var puntuation : int = 0
 var map1_puntuation : int = 0
 var map2_puntuation : int = 0
 var map3_puntuation : int = 0
 var map4_puntuation : int = 0
 var map5_puntuation : int = 0
+
+# Sistema de vidas
+static var player_lives : int = 3
+static var max_lives : int = 3
+
+# God Mode (las pelotas rebotarán automáticamente en el límite inferior)
+static var god_mode_active : bool = false
 
 var save_file_path := "user://arkanoid3D_save_game.json"
 
@@ -49,6 +59,14 @@ func clean_level_objects() -> void:
 func load_and_change_map(index: int) -> void:
 	clean_level_objects()
 	current_map_index = index
+	puntuation = 0
+	emit_signal("score_changed", puntuation)
+	
+	# Reiniciar vidas si se va al menú principal o se reinicia el juego
+	if index == 0 or index == 6:
+		player_lives = max_lives
+		emit_signal("lives_changed", player_lives)
+	
 	var map_path = load_map_by_index(index)
 	if map_path != "":
 		get_tree().call_deferred("change_scene_to_file", map_path)
@@ -69,17 +87,53 @@ func add_score(points: int) -> void:
 	puntuation += points
 	emit_signal("score_changed", puntuation)
 
+# Reduce una vida y devuelve true si quedan vidas, false si es game over
+func lose_life() -> bool:
+	player_lives -= 1
+	emit_signal("lives_changed", player_lives)
+	
+	if player_lives <= 0:
+		# Game over - volver al menú principal
+		player_lives = max_lives
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		return false
+	return true
+
+# Añade una vida extra (hasta el máximo)
+func add_life() -> void:
+	if player_lives < max_lives:
+		player_lives += 1
+		emit_signal("lives_changed", player_lives)
+
+# Devuelve el número actual de vidas
+func get_lives() -> int:
+	return player_lives
+
+# Funciones de God Mode
+func toggle_god_mode() -> void:
+	god_mode_active = !god_mode_active
+	emit_signal("god_mode_changed", god_mode_active)
+	print("God Mode: ", "Activado" if god_mode_active else "Desactivado")
+
+func is_god_mode_active() -> bool:
+	return god_mode_active
+
 func reset_level_flags():
 	complete_level_spawned = false
 
 func reset_progression():
 	current_map_index = 0
 	reset_level_flags()
+	player_lives = max_lives
+	emit_signal("lives_changed", player_lives)
 
 func advance_to_next_map() -> String:
 	save_state()
 	current_map_index += 1
 	reset_level_flags()
+	# Asegurarse de que la puntuación se resetea al avanzar de nivel
+	puntuation = 0
+	emit_signal("score_changed", puntuation)
 	if current_map_index < maps.size():
 		print(current_map_index)
 		print(maps.size())
@@ -87,6 +141,7 @@ func advance_to_next_map() -> String:
 	return ""
 
 func save_state() -> void:
+	# Guardar la puntuación más alta para cada mapa
 	if current_map_index == 0 && puntuation > map1_puntuation:
 		map1_puntuation = puntuation
 	if current_map_index == 1 && puntuation > map2_puntuation:
@@ -97,7 +152,7 @@ func save_state() -> void:
 		map4_puntuation = puntuation
 	if current_map_index == 4 && puntuation > map5_puntuation:
 		map5_puntuation = puntuation
-	puntuation = 0
+	# No resetear la puntuación aquí, solo guardar el archivo
 	save_scores_to_file()
 
 func save_scores_to_file():

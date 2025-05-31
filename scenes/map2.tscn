@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://djywy03ta7dga"]
+[gd_scene load_steps=22 format=3 uid="uid://djywy03ta7dga"]
 
 [ext_resource type="Shader" uid="uid://crpritlh1mm8l" path="res://shaders/map2.gdshader" id="1_ccs1r"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_hs16b"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cb3l5dfe31p4k" path="res://map_blocks/skeleton.tscn" id="9_cljsr"]
 [ext_resource type="Shader" uid="uid://d37xhv3ptc4vb" path="res://shaders/wobble_heat.gdshader" id="9_hs16b"]
 [ext_resource type="Texture2D" uid="uid://no84e5lgxsjf" path="res://assets/images/plUPA.jpg" id="10_btxqx"]
+[ext_resource type="Script" uid="uid://dmxdf5uvof5dl" path="res://scripts/camera_shake.gd" id="12_i6a4f"]
 [ext_resource type="AudioStream" uid="uid://7bukb8vtjfl2" path="res://music/Dusty Dune Galaxy - Super Mario Galaxy - Nintendo Soundtracks.mp3" id="14_1mo1p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hs16b"]
@@ -716,6 +717,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 5.5, -14)
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, -1.33939e-07, 1.12389e-07, 7.10543e-15, 0.642788, 0.766044, -1.74846e-07, -0.766044, 0.642788, 0, 48.4, 40.9)
 fov = 31.7
+script = ExtResource("12_i6a4f")
 
 [node name="Dust" type="Sprite3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 33.5, 10.5)
@@ -730,5 +732,6 @@ size = Vector2i(5000, 5000)
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("14_1mo1p")
 attenuation_model = 3
+volume_db = 5.0
 autoplay = true
 bus = &"Music"

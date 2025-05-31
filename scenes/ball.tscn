@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0ekue5jle6kp"]
+[gd_scene load_steps=9 format=3 uid="uid://d0ekue5jle6kp"]
 
 [ext_resource type="Script" uid="uid://c3quu267qxuh" path="res://scripts/ball.gd" id="1_7s4qf"]
 [ext_resource type="ArrayMesh" uid="uid://cnoxntmmtbkls" path="res://assets/powerups/ball.obj" id="2_cxlvu"]
 [ext_resource type="AudioStream" uid="uid://dha51y3mt6wo5" path="res://sfx/explosion-91872.mp3" id="3_f7cbr"]
 [ext_resource type="AudioStream" uid="uid://b3eradcihp2ls" path="res://sfx/054883_bounce-38937 (mp3cut.net).mp3" id="4_4dx81"]
+[ext_resource type="AudioStream" uid="uid://cgfvor8tr3qf1" path="res://sfx/Undertale Damage Sound Effect - YTSFX (mp3cut.net).mp3" id="5_eew57"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7s4qf"]
 
@@ -32,12 +33,17 @@ mesh = ExtResource("2_cxlvu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_4dx81")
-volume_db = -13.0
+volume_db = -15.0
 pitch_scale = 2.5
 bus = &"SFX"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_eew57")
-volume_db = -13.0
+volume_db = -15.0
 pitch_scale = 0.9
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_eew57")
+volume_db = -10.0
 bus = &"SFX"

@@ -7,6 +7,7 @@ extends CharacterBody3D
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
+@onready var audio_stream_player_3: AudioStreamPlayer = $AudioStreamPlayer3
 
 var launched: bool = false
 var direction: Vector3 = Vector3(0, 0, 1)
@@ -213,7 +214,14 @@ func check_out_of_bounds() -> void:
 			
 			# Si aún quedan vidas, respawnear la bola
 			if has_lives_left:
+				audio_stream_player_3.play()
 				
+				# hacer camera shake
+				var camera = find_node_recursive(get_tree().get_current_scene(), "Camera3D")
+				if camera and camera.has_method("trigger_shake"):
+					camera.trigger_shake(5.0)
+
+					
 				var players = get_tree().get_nodes_in_group("Player")
 				if players.size() > 0:
 					var player = players[0]
@@ -276,3 +284,13 @@ func spawn_extra_balls():
 		new_ball.current_rotation = current_rotation
 		
 		get_tree().root.add_child(new_ball)
+		
+func find_node_recursive(node: Node, name: String) -> Node:
+	if node.name == name:
+		return node
+	for child in node.get_children():
+		if child is Node:
+			var found = find_node_recursive(child, name)
+			if found:
+				return found
+	return null

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cgfvor8tr3qf1"
+path="res://.godot/imported/Undertale Damage Sound Effect - YTSFX (mp3cut.net).mp3-e4206bf81a29b1b69925b7162be10a98.mp3str"
+
+[deps]
+
+source_file="res://sfx/Undertale Damage Sound Effect - YTSFX (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/Undertale Damage Sound Effect - YTSFX (mp3cut.net).mp3-e4206bf81a29b1b69925b7162be10a98.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

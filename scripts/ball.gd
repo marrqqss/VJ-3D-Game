@@ -43,6 +43,10 @@ func _physics_process(delta: float) -> void:
 		#lock to player
 		var paddle_transform = get_parent().global_transform
 		global_transform.origin = paddle_transform.origin + attach_offset
+		
+		# Contrarrestar la escala del paddle para mantener el tamaño original de la bola
+		var parent = get_parent()
+		scale = Vector3(1.0 / parent.scale.x, 1.0, 1.0)
 
 		if Input.is_action_just_pressed("ui_accept"):
 			# — launch ball —
@@ -190,6 +194,9 @@ func check_out_of_bounds() -> void:
 					
 					# Posicionar correctamente
 					global_transform.origin = player.global_transform.origin + attach_offset
+					
+					# Contrarrestar la escala del paddle para mantener el tamaño original de la bola
+					scale = Vector3(1.0 / player.scale.x, 1.0, 1.0)
 				else:
 					# No hay jugador, destruir la bola
 					queue_free()

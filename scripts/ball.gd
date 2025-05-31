@@ -22,6 +22,9 @@ func _ready() -> void:
 	velocity = Vector3.ZERO
 
 func set_power_ball(active: bool) -> void:
+	power_ball_mode = false
+	explosive_mode = false
+	
 	power_ball_mode = active
 	
 
@@ -75,11 +78,12 @@ func _physics_process(delta: float) -> void:
 			# --- EXPLOSIVE BALL LOGIC ---
 			if explosive_mode and collider.is_in_group("blocks"):
 				# Eliminar todos los bloques cercanos
-				var explosion_radius = 2.5
+				var explosion_radius = 3.5
 				var blocks = get_tree().get_nodes_in_group("blocks")
 				for block in blocks:
 					if block.global_transform.origin.distance_to(col.get_position()) <= explosion_radius:
-						block.queue_free()
+						if block != collider:
+							block._on_body_entered(self)
 				# Rebote normal después de explosión
 				direction = direction.bounce(col.get_normal()) * BOUNCE
 				direction = direction.normalized()
@@ -119,6 +123,11 @@ func _physics_process(delta: float) -> void:
 var explosive_mode: bool = false
 
 func set_explosive_ball() -> void:
+	# Reset all power-up modes first
+	power_ball_mode = false
+	explosive_mode = false
+	
+	# Then activate the requested mode
 	explosive_mode = true
 
 func launch_from_paddle():
@@ -151,13 +160,31 @@ func spawn_extra_balls():
 		var new_ball = ball_scene.instantiate()
 		new_ball.add_to_group("ball")
 		
-		# Heredar configuraciones de colisión
-		new_ball.collision_layer = collision_layer  # Capa 'balls' (1)
-		new_ball.collision_mask = collision_mask    # Máscara original (blocks + player)
+		
+		new_ball.collision_layer = collision_layer
+		new_ball.collision_mask = collision_mask    
+		
 		
 		new_ball.global_transform = global_transform
-		new_ball.direction = -direction.rotated(Vector3.UP, deg_to_rad(angle))
+		
+		
 		new_ball.launched = true
-		new_ball.velocity = new_ball.direction * SPEED
+		
+		
+		if power_ball_mode:
+			new_ball.set_power_ball(true)
+		if explosive_mode:
+			new_ball.set_explosive_ball()
+		
+		
+		new_ball.direction = -direction.rotated(Vector3.UP, deg_to_rad(angle))
+		
+		
+		var current_speed = velocity.length()
+		new_ball.SPEED = current_speed  
+		new_ball.velocity = new_ball.direction * current_speed
+		
+		
+		new_ball.current_rotation = current_rotation
 		
 		get_tree().root.add_child(new_ball)

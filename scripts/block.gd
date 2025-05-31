@@ -2,6 +2,7 @@ extends RigidBody3D
 
 @onready var detector := $HitDetector
 @export var powerup_chance: float = 0.2 # 20% de probabilidad de spawneo
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var _initial_block_count := -1
 
@@ -39,7 +40,7 @@ func _on_body_entered(body: Node) -> void:
 
 	GameState.add_score(500)
 
-	queue_free()
+	animation_player.play("destroy")
 
 
 func spawn_powerup(pos: Vector3, force_complete_level: bool = false) -> void:

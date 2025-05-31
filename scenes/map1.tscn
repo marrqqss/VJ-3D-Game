@@ -512,7 +512,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7.5, -4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 7.5, -4.40642)
 
 [node name="Lumberjack2" parent="Characters" instance=ExtResource("12_lpe66")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9.5, -8.40642)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9.5, -7.9064)
 
 [node name="CameraPivot" type="Node3D" parent="."]
 
@@ -524,3 +524,4 @@ fov = 31.7
 stream = ExtResource("15_txtfr")
 attenuation_model = 3
 autoplay = true
+bus = &"Music"

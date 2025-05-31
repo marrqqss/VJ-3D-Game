@@ -36,6 +36,12 @@ ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.64001, 0.311704, 0.0566691, 1)
+fog_light_energy = 0.4
+fog_sky_affect = 0.2
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.692722, 0.295141, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrbqd"]
 vertex_color_use_as_albedo = true
@@ -607,9 +613,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.00846, -2)
 [node name="Bricks_gray15" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.00846, -2)
 
-[node name="Bricks_gray16" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4.00846, -2)
-
 [node name="Bricks_gray18" parent="LevelBlocks" instance=ExtResource("5_2pqj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6.00846, -2)
 
@@ -727,3 +730,4 @@ fov = 31.7
 stream = ExtResource("15_y1m0o")
 attenuation_model = 3
 autoplay = true
+bus = &"Music"

@@ -528,7 +528,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7.5, -4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 7.5, -4.40642)
 
 [node name="Lumberjack2" parent="Characters" instance=ExtResource("12_1dfpl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9.5, -8.40642)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9.5, -7.9064)
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -732,6 +732,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.90735e-06)
 stream = ExtResource("14_1ajci")
 attenuation_model = 3
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="VBoxContainer/Start Game" to="VBoxContainer" method="_on_start_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="VBoxContainer" method="_on_exit_pressed"]

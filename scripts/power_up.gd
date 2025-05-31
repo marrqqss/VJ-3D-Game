@@ -56,34 +56,44 @@ func _on_body_entered(body: Node) -> void:
 func apply_powerup(player: Node) -> void:
 	match powerup_type:
 		"expand_paddle":
+			GameState.add_score(1000)
 			player.expand_paddle()
 		"reduce_paddle":
+			GameState.add_score(5000)
 			player.reduce_paddle()
 		"power_ball":
+			GameState.add_score(2500)
 			player.power_ball()
 		"magnet":
+			GameState.add_score(2500)
 			player.activate_magnet()
 		"extra_balls":
+			GameState.add_score(3500)
 			var balls = get_tree().get_nodes_in_group("ball")
 			for ball in balls:
 				ball.spawn_extra_balls()
 		"slow_ball":
+			GameState.add_score(3000)
 			var balls = get_tree().get_nodes_in_group("ball")
 			for ball in balls:
 				ball.SPEED *= 0.8  # Reduce speed by 20%
 		"speed_ball":
+			GameState.add_score(6000)
 			var balls = get_tree().get_nodes_in_group("ball")
 			for ball in balls:
 				ball.SPEED *= 1.2  # Increase speed by 20%
 		"normal_ball":
+			GameState.add_score(5000)
 			if player._power_ball_active:
 				player.normal_ball()
 		"explosive_ball":
+			GameState.add_score(3000)
 			var balls = get_tree().get_nodes_in_group("ball")
 			for ball in balls:
 				if ball.has_method("set_explosive_ball"):
 					ball.set_explosive_ball()
 		"complete_level":
+			GameState.add_score(7500)
 			# Limpia todos los objetos del nivel usando la función centralizada
 			GameState.clean_level_objects()
 			

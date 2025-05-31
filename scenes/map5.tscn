@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7jycrh73urcw"]
+[gd_scene load_steps=19 format=3 uid="uid://7jycrh73urcw"]
 
 [ext_resource type="Shader" uid="uid://degwhmxxbgbd" path="res://shaders/map5.gdshader" id="1_3l5go"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_bexgc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dfm61yh2ftvvo" path="res://map_blocks/candle_small.tscn" id="4_vmaf8"]
 [ext_resource type="PackedScene" uid="uid://cskn72mesxb77" path="res://map_blocks/candle_pack.tscn" id="6_3l5go"]
 [ext_resource type="PackedScene" uid="uid://c8nt3n5j8jb1a" path="res://map_blocks/mage.tscn" id="8_ip23h"]
+[ext_resource type="AudioStream" uid="uid://t2e0r7nfy43l" path="res://music/Submarine Theme - ConcernedApe.mp3" id="11_feugh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ip23h"]
 shader = ExtResource("1_3l5go")
@@ -388,3 +389,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -4)
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, -1.33939e-07, 1.12389e-07, 7.10543e-15, 0.642788, 0.766044, -1.74846e-07, -0.766044, 0.642788, 0, 48.4, 40.9)
 fov = 31.7
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_feugh")
+attenuation_model = 3
+autoplay = true

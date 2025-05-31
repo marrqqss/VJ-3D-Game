@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://djywy03ta7dga"]
+[gd_scene load_steps=21 format=3 uid="uid://djywy03ta7dga"]
 
 [ext_resource type="Shader" uid="uid://crpritlh1mm8l" path="res://shaders/map2.gdshader" id="1_ccs1r"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_hs16b"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cb3l5dfe31p4k" path="res://map_blocks/skeleton.tscn" id="9_cljsr"]
 [ext_resource type="Shader" uid="uid://d37xhv3ptc4vb" path="res://shaders/wobble_heat.gdshader" id="9_hs16b"]
 [ext_resource type="Texture2D" uid="uid://no84e5lgxsjf" path="res://assets/images/plUPA.jpg" id="10_btxqx"]
+[ext_resource type="AudioStream" uid="uid://7bukb8vtjfl2" path="res://music/Dusty Dune Galaxy - Super Mario Galaxy - Nintendo Soundtracks.mp3" id="14_1mo1p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hs16b"]
 shader = ExtResource("1_ccs1r")
@@ -725,3 +726,8 @@ texture = SubResource("ViewportTexture_btxqx")
 
 [node name="SubViewport" type="SubViewport" parent="CameraPivot/Dust"]
 size = Vector2i(5000, 5000)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("14_1mo1p")
+attenuation_model = 3
+autoplay = true

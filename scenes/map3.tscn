@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://brlitfkqjp8ov"]
+[gd_scene load_steps=29 format=3 uid="uid://brlitfkqjp8ov"]
 
 [ext_resource type="Shader" uid="uid://dq8ifb5bshpna" path="res://shaders/map3.gdshader" id="1_0yy7v"]
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_53xux"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://d0nbawebu43v6" path="res://map_blocks/warrior.tscn" id="10_dx867"]
 [ext_resource type="PackedScene" uid="uid://d4k8850evpbiy" path="res://map_blocks/skeleton_warrior.tscn" id="11_lrbqd"]
 [ext_resource type="PackedScene" uid="uid://cb3l5dfe31p4k" path="res://map_blocks/skeleton.tscn" id="12_lrbqd"]
+[ext_resource type="AudioStream" uid="uid://baci5qfhb1ash" path="res://music/Burning Secrets - Kirby and the Rainbow Curse OST - valternate.mp3" id="15_y1m0o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gidj7"]
 shader = ExtResource("1_0yy7v")
@@ -721,3 +722,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3.5, -10)
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, -1.33939e-07, 1.12389e-07, 7.10543e-15, 0.642788, 0.766044, -1.74846e-07, -0.766044, 0.642788, 0, 48.4, 40.9)
 fov = 31.7
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("15_y1m0o")
+attenuation_model = 3
+autoplay = true

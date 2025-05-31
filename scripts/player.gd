@@ -52,7 +52,6 @@ func _physics_process(delta: float) -> void:
 
 # TEST: Explosive Ball
 func explosive_ball() -> void:
-	GameState.add_score(3000)
 	var balls = get_tree().get_nodes_in_group("ball")
 	for ball in balls:
 		if ball.has_method("set_explosive_ball"):
@@ -60,19 +59,16 @@ func explosive_ball() -> void:
 
 # Called by the Powerup when “expand_paddle” is picked up
 func expand_paddle() -> void:
-	GameState.add_score(1000)
 	_current_scale_factor *= 1.2  # Aumenta 20% cada vez
 	scale.x = _orig_scale.x * _current_scale_factor
 	
 	
 func reduce_paddle() -> void:
-	GameState.add_score(5000)
 	_current_scale_factor *= 0.8  # Reduce 20% cada vez
 	scale.x = _orig_scale.x * _current_scale_factor
 
 	
 func power_ball() -> void:
-	GameState.add_score(2500)
 	# Activar el powerup permanentemente
 	_power_ball_active = true
 	# Indicarle a la bola que está en modo power_ball
@@ -83,7 +79,6 @@ func power_ball() -> void:
 
 # NORMAL BALL POWER-UP
 func normal_ball() -> void:
-	GameState.add_score(5000)
 	_power_ball_active = false
 	# Desactivar el modo power_ball en todas las bolas
 	var balls = get_tree().get_nodes_in_group("ball")
@@ -93,17 +88,14 @@ func normal_ball() -> void:
 	
 
 func activate_magnet() -> void:
-	GameState.add_score(2500)
 	magnet_active = true
 
 func speed_ball() -> void:
-	GameState.add_score(6000)
 	var balls = get_tree().get_nodes_in_group("ball")
 	for ball in balls:
 		ball.SPEED *= 1.2 # Aumenta velocidad 20%
 
 func slow_ball() -> void:
-	GameState.add_score(3000)
 	var balls = get_tree().get_nodes_in_group("ball")
 	for ball in balls:
 		ball.SPEED *= 0.8 # Reduce velocidad 20%

@@ -49,6 +49,9 @@ func clean_level_objects() -> void:
 func load_and_change_map(index: int) -> void:
 	clean_level_objects()
 	current_map_index = index
+	# Resetear la puntuación al cambiar de mapa manualmente
+	puntuation = 0
+	emit_signal("score_changed", puntuation)
 	var map_path = load_map_by_index(index)
 	if map_path != "":
 		get_tree().call_deferred("change_scene_to_file", map_path)
@@ -80,6 +83,9 @@ func advance_to_next_map() -> String:
 	save_state()
 	current_map_index += 1
 	reset_level_flags()
+	# Asegurarse de que la puntuación se resetea al avanzar de nivel
+	puntuation = 0
+	emit_signal("score_changed", puntuation)
 	if current_map_index < maps.size():
 		print(current_map_index)
 		print(maps.size())
@@ -87,6 +93,7 @@ func advance_to_next_map() -> String:
 	return ""
 
 func save_state() -> void:
+	# Guardar la puntuación más alta para cada mapa
 	if current_map_index == 0 && puntuation > map1_puntuation:
 		map1_puntuation = puntuation
 	if current_map_index == 1 && puntuation > map2_puntuation:
@@ -97,7 +104,7 @@ func save_state() -> void:
 		map4_puntuation = puntuation
 	if current_map_index == 4 && puntuation > map5_puntuation:
 		map5_puntuation = puntuation
-	puntuation = 0
+	# No resetear la puntuación aquí, solo guardar el archivo
 	save_scores_to_file()
 
 func save_scores_to_file():

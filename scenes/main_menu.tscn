@@ -731,6 +731,7 @@ fov = 31.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.90735e-06)
 stream = ExtResource("14_1ajci")
 attenuation_model = 3
+volume_db = 5.0
 autoplay = true
 bus = &"Music"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bpnww41ipkl7n"]
+[gd_scene load_steps=29 format=3 uid="uid://bpnww41ipkl7n"]
 
 [ext_resource type="PackedScene" uid="uid://dpfu28retw1n8" path="res://scenes/player.tscn" id="1_i4bwb"]
 [ext_resource type="Shader" uid="uid://tqanbjnlnb27" path="res://shaders/map4.gdshader" id="1_m6o67"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cmvs7ll62nx6a" path="res://map_blocks/gravel.tscn" id="8_b2cge"]
 [ext_resource type="PackedScene" uid="uid://rud4n3a6n2bk" path="res://map_blocks/skeleton_hood.tscn" id="11_eefgs"]
 [ext_resource type="AudioStream" uid="uid://uuo0bv26rc0x" path="res://music/Donkey Kong Country 2 - In A Snow-Bound Land [Restored] - Jammin' Sam Miller.mp3" id="14_ccslo"]
+[ext_resource type="Script" uid="uid://dmxdf5uvof5dl" path="res://scripts/camera_shake.gd" id="14_dolx6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eefgs"]
 shader = ExtResource("1_m6o67")
@@ -551,9 +552,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 7.5, -10)
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, -1.33939e-07, 1.12389e-07, 7.10543e-15, 0.642788, 0.766044, -1.74846e-07, -0.766044, 0.642788, 0, 48.4, 40.9)
 fov = 31.7
+script = ExtResource("14_dolx6")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("14_ccslo")
 attenuation_model = 3
+volume_db = 10.0
 autoplay = true
 bus = &"Music"

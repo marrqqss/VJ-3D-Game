@@ -31,6 +31,17 @@ func set_power_ball(active: bool) -> void:
 # Límite Z más allá del cual la bola se destruirá
 @export var out_of_bounds_z: float = 17.0
 
+# Límite Z para el rebote en God Mode
+@export var god_mode_bounce_z: float = 16.0
+
+# Límites X para el rebote en God Mode (límites laterales)
+@export var god_mode_bounce_x_min: float = -17.0
+@export var god_mode_bounce_x_max: float = 17.0
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_G:
+		GameState.toggle_god_mode()
+
 func _physics_process(delta: float) -> void:
 	if is_attached_to_paddle:
 		# Mantener posición y contrarrestar la escala del paddle
@@ -163,48 +174,63 @@ func _finish_launch(previous_global: Transform3D, launch_dir: Vector3):
 	
 # Función para verificar si la bola está fuera de los límites
 func check_out_of_bounds() -> void:
-	# Verificar si la bola ha ido más allá del límite Z
+	if GameState.is_god_mode_active():
+		var position_changed = false
+		
+		if global_transform.origin.z > god_mode_bounce_z:
+			direction.z = -abs(direction.z) * 1.2
+			global_transform.origin.z = god_mode_bounce_z - 0.5
+			position_changed = true
+		
+		if global_transform.origin.x < god_mode_bounce_x_min:
+			direction.x = abs(direction.x) * 1.1
+			global_transform.origin.x = god_mode_bounce_x_min + 0.5
+			position_changed = true
+		
+		if global_transform.origin.x > god_mode_bounce_x_max:
+			direction.x = -abs(direction.x) * 1.1
+			global_transform.origin.x = god_mode_bounce_x_max - 0.5
+			position_changed = true
+		
+		
+		if position_changed:
+			direction = direction.normalized()
+			velocity = direction * SPEED
+			return
+	
+	# Verificar si la bola ha ido más allá del límite Z (para destrucción/respawn)
 	if global_transform.origin.z > out_of_bounds_z:
 		# Si es la última bola, perder una vida y respawnear en el jugador
 		var balls = get_tree().get_nodes_in_group("ball")
 		if balls.size() <= 1:
-			# Reducir una vida
 			var has_lives_left = GameState.lose_life()
 			
 			# Si aún quedan vidas, respawnear la bola
 			if has_lives_left:
-				# Buscar al jugador
+				
 				var players = get_tree().get_nodes_in_group("Player")
 				if players.size() > 0:
-					# Resetear la bola en lugar de destruirla
 					var player = players[0]
 					
-					# Reparentear la bola al jugador
 					var current_parent = get_parent()
 					if current_parent != player:
 						current_parent.remove_child(self)
 						player.add_child(self)
 					
-					# Resetear estado
 					launched = false
 					velocity = Vector3.ZERO
 					is_attached_to_paddle = false
 					power_ball_mode = false
 					explosive_mode = false
 					
-					# Posicionar correctamente
 					global_transform.origin = player.global_transform.origin + attach_offset
 					
-					# Contrarrestar la escala del paddle para mantener el tamaño original de la bola
 					scale = Vector3(1.0 / player.scale.x, 1.0, 1.0)
 				else:
-					# No hay jugador, destruir la bola
 					queue_free()
 			else:
-				# No quedan vidas, la bola se destruye (GameState ya se encarga de ir al menú)
 				queue_free()
 		else:
-			# Hay más bolas, simplemente destruir esta
 			queue_free()
 	
 	

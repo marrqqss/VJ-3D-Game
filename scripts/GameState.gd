@@ -2,6 +2,7 @@ extends Node
 
 signal score_changed(new_score: int)
 signal lives_changed(new_lives: int)
+signal god_mode_changed(is_active: bool)
 
 var puntuation : int = 0
 var map1_puntuation : int = 0
@@ -11,8 +12,11 @@ var map4_puntuation : int = 0
 var map5_puntuation : int = 0
 
 # Sistema de vidas
-var player_lives : int = 3
-var max_lives : int = 3
+static var player_lives : int = 3
+static var max_lives : int = 3
+
+# God Mode (las pelotas rebotarán automáticamente en el límite inferior)
+static var god_mode_active : bool = false
 
 var save_file_path := "user://arkanoid3D_save_game.json"
 
@@ -88,12 +92,10 @@ func lose_life() -> bool:
 	player_lives -= 1
 	emit_signal("lives_changed", player_lives)
 	
-	# Si no quedan vidas, ir al menú principal
 	if player_lives <= 0:
-		# Guardar puntuación antes de salir
-		save_state()
-		# Volver al menú principal
-		load_and_change_map(6)
+		# Game over - volver al menú principal
+		player_lives = max_lives
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		return false
 	return true
 
@@ -106,6 +108,15 @@ func add_life() -> void:
 # Devuelve el número actual de vidas
 func get_lives() -> int:
 	return player_lives
+
+# Funciones de God Mode
+func toggle_god_mode() -> void:
+	god_mode_active = !god_mode_active
+	emit_signal("god_mode_changed", god_mode_active)
+	print("God Mode: ", "Activado" if god_mode_active else "Desactivado")
+
+func is_god_mode_active() -> bool:
+	return god_mode_active
 
 func reset_level_flags():
 	complete_level_spawned = false

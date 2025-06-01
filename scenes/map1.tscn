@@ -508,6 +508,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
 
 [node name="Hunter" parent="Characters" instance=ExtResource("11_srta2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7.5, -4)
+color = Color(0.984007, 0.851687, 0.664119, 1)
 
 [node name="Lumberjack" parent="Characters" instance=ExtResource("12_lpe66")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 7.5, -4.40642)

@@ -3,6 +3,7 @@ extends RigidBody3D
 @onready var detector := $HitDetector
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var powerup_chance: float = 0.1 # 10% de probabilidad de spawneo
+@export var color : Color = Color.RED
 
 # Variable estática compartida por todos los bloques
 static var _initial_block_count := -1
@@ -34,6 +35,7 @@ func _on_body_entered(body: Node) -> void:
 		return
 
 	print("ball")
+	spawn_destruction_particles(color)
 	var my_pos: Vector3 = global_transform.origin
 
 	# Obtener el recuento de bloques antes de destruir este
@@ -101,3 +103,10 @@ func spawn_powerup(pos: Vector3, force_complete_level: bool = false) -> void:
 	powerup = powerup_scene.instantiate()
 	powerup.transform.origin = pos
 	get_tree().current_scene.add_child(powerup)
+
+func spawn_destruction_particles(color: Color) -> void:
+	var particle_scene = preload("res://scenes/break_block.tscn")
+	var particle_instance = particle_scene.instantiate()
+	particle_instance.global_transform.origin = global_transform.origin
+	get_tree().root.add_child(particle_instance)
+	particle_instance.break_block_particles(color)

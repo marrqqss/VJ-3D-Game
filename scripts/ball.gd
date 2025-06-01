@@ -14,6 +14,7 @@ var launched: bool = false
 var direction: Vector3 = Vector3(0, 0, 1)
 var power_ball_mode: bool = false
 var current_rotation: float = 0.0
+var explosive_mode: bool = false
 
 var is_attached_to_paddle: bool = false
 var collision_offset: Vector3 = Vector3.ZERO
@@ -119,8 +120,9 @@ func _physics_process(delta: float) -> void:
 				return
 
 			if power_ball_mode and collider.is_in_group("blocks"):
-				# Power Ball: no rebotar
-				pass
+				# Power Ball: destruir el bloque sin rebotar
+				collider._on_body_entered(self)
+				return
 				
 			elif collider.is_in_group("Player"):
 				if collider.magnet_active:
@@ -162,8 +164,6 @@ func _physics_process(delta: float) -> void:
 				direction = direction.normalized()
 				velocity = direction * SPEED
 
-
-var explosive_mode: bool = false
 
 func set_explosive_ball() -> void:
 	# Reset all power-up modes first
@@ -264,40 +264,44 @@ func check_out_of_bounds() -> void:
 	
 	
 func spawn_extra_balls():
+	# Si la bola está enganchada a la paleta, no generar bolas extra
+	if is_attached_to_paddle:
+		print("No se pueden generar bolas extra mientras la bola está enganchada a la paleta")
+		return
+	
 	var angles = [30, -30]
 	var ball_scene = load("res://scenes/ball.tscn")
+	
+	# Guardar la velocidad actual para aplicarla a las nuevas bolas
+	var current_speed = SPEED
+	if velocity.length() > 0.1:
+		current_speed = velocity.length()
 	
 	for angle in angles:
 		var new_ball = ball_scene.instantiate()
 		new_ball.add_to_group("ball")
 		
-		
+		# Configurar propiedades de colisión
 		new_ball.collision_layer = collision_layer
-		new_ball.collision_mask = collision_mask    
+		new_ball.collision_mask = collision_mask
 		
-		
+		# Copiar transformación
 		new_ball.global_transform = global_transform
 		
-		
+		# Configurar la bola para que sea lanzada
 		new_ball.launched = true
-		
-		
-		if power_ball_mode:
-			new_ball.set_power_ball(true)
-		if explosive_mode:
-			new_ball.set_explosive_ball()
-		
-		
 		new_ball.direction = -direction.rotated(Vector3.UP, deg_to_rad(angle))
-		
-		
-		var current_speed = velocity.length()
-		new_ball.SPEED = current_speed  
+		new_ball.SPEED = current_speed
 		new_ball.velocity = new_ball.direction * current_speed
-		
-		
 		new_ball.current_rotation = current_rotation
 		
+		# Aplicar powerups
+		if power_ball_mode:
+			new_ball.power_ball_mode = true
+		if explosive_mode:
+			new_ball.explosive_mode = true
+		
+		# Añadir al árbol de escena
 		get_tree().root.add_child(new_ball)
 		
 func find_node_recursive(node: Node, name: String) -> Node:

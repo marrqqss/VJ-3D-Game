@@ -5,6 +5,8 @@ extends Area3D
 @export var powerup_type: String = "expand_paddle"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+# Altura del suelo
+@export var floor_height: float = 1.5
 
 # Variables para el efecto de rebote
 @export var initial_bounce_height: float = 10.0
@@ -13,20 +15,44 @@ var y_velocity: float = 0.0
 var bounce_gravity: float = 15.0  
 var is_bouncing: bool = true
 var original_y: float = 0.0
-var timer = 0
+var is_falling_to_floor: bool = false
+var fall_to_floor_speed: float = 10.0
 
 func _ready() -> void:
 	add_to_group("powerups")
 	body_entered.connect(Callable(self, "_on_body_entered"))
 	
-	# Guardar posición Y inicial y dar impulso hacia arriba
-	original_y = global_transform.origin.y
-	y_velocity = initial_bounce_height
+	# Guardar la posición Y original para referencia
+	var spawn_y = global_transform.origin.y
+	
+	# Verificar si el powerup está por encima del suelo
+	if spawn_y > floor_height + 0.5:
+		# Si está muy por encima, primero caerá hasta el suelo
+		is_falling_to_floor = true
+		is_bouncing = false
+	else:
+		# Si ya está cerca del suelo, ajustar a la altura correcta e iniciar el rebote
+		global_transform.origin.y = floor_height
+		original_y = floor_height
+		y_velocity = initial_bounce_height
 
 func _process(delta: float) -> void:
 	# Aplicar rotación visual
 	rotate_y(rotation_speed * delta)
-	if is_bouncing:
+	
+	if is_falling_to_floor:
+		# Caer hacia el suelo rápidamente
+		global_transform.origin.y -= fall_to_floor_speed * delta
+		
+		# Cuando llegue al suelo, iniciar el rebote
+		if global_transform.origin.y <= floor_height:
+			global_transform.origin.y = floor_height
+			is_falling_to_floor = false
+			is_bouncing = true
+			original_y = floor_height
+			y_velocity = initial_bounce_height
+			
+	elif is_bouncing:
 		# Simular gravedad
 		y_velocity -= bounce_gravity * delta
 		
@@ -46,8 +72,8 @@ func _process(delta: float) -> void:
 	# Siempre mover hacia la paleta (en Z)
 	global_transform.origin.z += fall_speed * delta
 	
-	# Eliminar si cae fuera del área
-	if global_transform.origin.z > 25.0:
+	# Eliminar si cae fuera del área 
+	if global_transform.origin.z > 17.0:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:

@@ -147,6 +147,7 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 can_sleep = false
 script = ExtResource("1_elwhm")
+color = Color(0.839216, 0.631373, 0.537255, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00477803, 0, -0.00272062)

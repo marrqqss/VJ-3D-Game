@@ -103,6 +103,8 @@ func _physics_process(delta: float) -> void:
 			if explosive_mode and collider.is_in_group("blocks"):
 				audio_stream_player_2.play()
 				audio_stream_player.play()
+				
+				spawn_explosion(col.get_position())
 				# Eliminar todos los bloques cercanos
 				var explosion_radius = 3.5
 				var blocks = get_tree().get_nodes_in_group("blocks")
@@ -294,3 +296,11 @@ func find_node_recursive(node: Node, name: String) -> Node:
 			if found:
 				return found
 	return null
+	
+func spawn_explosion(position: Vector3) -> void:
+	print("EXPLOSION")
+	var explosion_scene = preload("res://scenes/explosion.tscn")
+	var explosion_instance = explosion_scene.instantiate()
+	explosion_instance.global_transform.origin = position
+	get_tree().root.add_child(explosion_instance)
+	explosion_instance.explode()

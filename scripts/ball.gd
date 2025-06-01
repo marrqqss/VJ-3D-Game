@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var BOUNCE: float = 1.0
 @export var attach_offset: Vector3 = Vector3(0, 0, -1)
 @export var ROTATION_SPEED: float = 0.4  
+@export var MIN_BOUNCE_ANGLE_DEGREES: float = 20.0
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
@@ -145,9 +146,21 @@ func _physics_process(delta: float) -> void:
 			
 			else:
 				audio_stream_player_2.play()
-				# Rebote con otros objetos (paredes, etc)
-				direction = direction.bounce(col.get_normal()) * BOUNCE
+				# rebotar con otros objetos
+				var bounced = direction.bounce(normal) * BOUNCE
+				bounced = bounced.normalized()
+
+				# evitar angulos muy pequeños
+				var angle = rad_to_deg(direction.angle_to(bounced))
+				if angle < MIN_BOUNCE_ANGLE_DEGREES:
+					var axis = normal.cross(Vector3.UP).normalized()
+					var perturb_angle = deg_to_rad(randf_range(5.0, 15.0))
+					bounced = bounced.rotated(axis, perturb_angle).normalized()
+					direction = bounced
+				else:
+					direction = bounced
 				direction = direction.normalized()
+				velocity = direction * SPEED
 
 
 var explosive_mode: bool = false

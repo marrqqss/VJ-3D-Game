@@ -67,6 +67,16 @@ func load_and_change_map(index: int) -> void:
 		player_lives = max_lives
 		emit_signal("lives_changed", player_lives)
 	
+	# Reiniciar variables estáticas de los bloques
+	if has_node("/root/Block"):
+		get_node("/root/Block").reset_static_vars()
+	else:
+		# Si no podemos acceder directamente a la clase, cargamos el script
+		var block_script = load("res://scripts/block.gd")
+		if block_script and block_script.has_method("reset_static_vars"):
+			block_script.reset_static_vars()
+			print("[DEBUG] Variables estáticas de bloques reiniciadas desde GameState")
+	
 	var map_path = load_map_by_index(index)
 	if map_path != "":
 		get_tree().call_deferred("change_scene_to_file", map_path)
@@ -134,9 +144,16 @@ func advance_to_next_map() -> String:
 	# Asegurarse de que la puntuación se resetea al avanzar de nivel
 	puntuation = 0
 	emit_signal("score_changed", puntuation)
+	
+	# Reiniciar variables estáticas de los bloques
+	var block_script = load("res://scripts/block.gd")
+	if block_script and block_script.has_method("reset_static_vars"):
+		block_script.reset_static_vars()
+		print("[DEBUG] Variables estáticas de bloques reiniciadas al avanzar de nivel")
+	
 	if current_map_index < maps.size():
-		print(current_map_index)
-		print(maps.size())
+		print("Avanzando al nivel:", current_map_index)
+		print("Total de niveles:", maps.size())
 		return maps[current_map_index]
 	return ""
 
